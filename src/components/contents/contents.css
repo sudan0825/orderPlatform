@@ -1,11 +1,8 @@
 .contents{
     min-height: 1000px;
     width: 82%;
-    border-right:1px solid black;
-    border-left:1px solid black;
     margin: auto;
- 
-    overflow: scroll;
+    overflow: auto;
 }
 
 

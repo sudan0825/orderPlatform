@@ -1,7 +1,7 @@
 .itemContainer{
     width: 95%;
     min-height: 300px;
-   
     margin: 15px auto;
-    overflow: scroll;
+    overflow: auto;
+    border: 6px ridge #bbe4ed;
 }

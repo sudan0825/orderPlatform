@@ -7,8 +7,9 @@ import ImageContainer from '../imageContainer/imageContainer';
 
 const itemContainer=(props)=>(
     <div className={myStyle.itemContainer}>
+     <ImageContainer/>
     <ActionContainer/>
-    <ImageContainer/>
+   
             
                   
    </div>)

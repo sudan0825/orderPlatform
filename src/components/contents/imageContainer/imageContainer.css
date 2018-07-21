@@ -1,0 +1,14 @@
+.imageContainer{
+    width: 40%;
+    height: inherit;
+    display: inline-block;
+}
+
+.image{
+    position: relative;
+    width: 80%;
+    margin: auto;
+    top: 25px;
+    height: 250px;
+    background: white;
+}

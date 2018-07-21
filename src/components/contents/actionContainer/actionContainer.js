@@ -6,9 +6,9 @@ const actionContainer=(props)=>(
     <h3>Sample</h3>
     
             <p>Let's take a look at building something using Firebase and React. We'll be building something called Fun Food Friends, a web application for planning your next potluck, which hopefully feels like something rather "real world", in that you can imagine using these technologies in your own production projects.</p>
-    <p >Price: $5 </p>
-    <button></button>
-    <button></button>
+    <p ><b>Price:</b> $5 </p>
+    <button><p>+</p></button>
+    <button><p>-</p></button>
                   
    </div>)
     

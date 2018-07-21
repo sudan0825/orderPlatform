@@ -10,7 +10,7 @@ class navigationMenue extends Component{
         menue:["Menue", "Orders"]
     }
     nvItems=this.state.menue.map((item)=>{
-        console.log(item);
+     
         return <NavigationItems key={item} item={item}/>})
     render(){
     return (

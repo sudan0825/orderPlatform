@@ -6,9 +6,7 @@ import ItemContainer from './itemContainer/itemContainer'
 const contents=(props)=>(
     <div className={myStyle.contents}>
     <ItemContainer/>
-    <ItemContainer/>
-    <ItemContainer/>
-    <ItemContainer/>
+
             
                   
    </div>)

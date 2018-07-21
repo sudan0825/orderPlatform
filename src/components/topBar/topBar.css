@@ -1,0 +1,6 @@
+.topBar{
+    position: relative;
+    height: 48px;
+    width: 100%;
+    border:1px solid black;
+}

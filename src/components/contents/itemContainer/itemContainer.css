@@ -1,0 +1,6 @@
+.itemContainer{
+    width: 95%;
+    height: 300px;
+    border: 1px solid black;
+    margin: 15px auto;
+}

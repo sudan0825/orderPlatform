@@ -1,0 +1,8 @@
+.actionContainer{
+    display: inline-block;
+    float: right;
+    width: 60%;
+    height: inherit;
+    border: 1px solid red;
+    
+}

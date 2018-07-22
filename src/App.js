@@ -5,12 +5,15 @@ import NavigationMenue from './components/topBar/navigation/NavigationMenue/Navi
 import TopBar from './components/topBar/topBar';
 import Footer from './components/footer/footer';
 import Contents from './components/contents/contents';
-import ActionContainer from './components/contents/actionContainer/actionContainer';
+
+
+import { BrowserRouter } from 'react-router-dom';
 
 
 class App extends Component {
   render() {
     return (
+         <BrowserRouter>
       <div className={myStyle.App}>
        <TopBar>
         
@@ -25,6 +28,7 @@ class App extends Component {
         <Footer/>
      
       </div>
+         </BrowserRouter>
     );
   }
 }

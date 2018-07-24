@@ -42,13 +42,13 @@ class UpdateInfo extends Component{
                  elemType:'input',
                  elemConfig:{
                      type:'number',
-                     placeholder:'Number only',
+                     placeholder:'Number only & Keep 2 decimal',
                   
                  },
                  value:'',
                  validation:{
                      required:true,
-                     isNumeric:true
+                     isFloat:true
                  },
                  valid:false,
                  touched:false
@@ -86,21 +86,30 @@ class UpdateInfo extends Component{
                  touched:false
              }
          },
-        formIsValid:true
+        formIsValid:true,
+        allRequired:""
     }
 
 addNewProductionHandler=(event)=>{
      event.preventDefault();
-       
+        if(!this.state.formIsValid){
+           
+            this.setState({allRequired:"All field are required"})
+            return 
+        }
+         this.setState({allRequired:""})
         const inventory= {};
         for (let key in this.state.beers) {
+         
             inventory[key] = this.state.beers[key].value;
+            this.state.beers[key].value=""
+            
         }
         
         axios.post( '/inventory.json', inventory )
             .then( response => {
                 
-             
+       
             } )
             .catch( error => {
              console.log(error)
@@ -118,10 +127,15 @@ addNewProductionHandler=(event)=>{
             isValid = value.trim() !== '' && isValid;
         }
        
+        
+        if(rules.isNumeric){
+            const pattern=/^\d+$/;
+            isValid=pattern.test(value)&&isValid;
+        }
 
-        if (rules.isNumeric) {
-            const pattern = /^\d+$/;
-            isValid = pattern.test(value) && isValid
+        if (rules.isFloat) {
+            const pattern = /^\d+.\d{2}$/;
+            isValid = pattern.test(value) && isValid;
         }
 
         return isValid;
@@ -134,14 +148,18 @@ inputChangeHandler=(event, id)=>{
         const updatedInventoryElement = { 
             ...updatedInventory[id]
         };
+       
         updatedInventoryElement.value = event.target.value;
         updatedInventoryElement.valid = this.checkValidity(updatedInventoryElement.value, updatedInventoryElement.validation);
         updatedInventoryElement.touched = true;
         updatedInventory[id] = updatedInventoryElement;
-        
+       
         let formIsValid = true;
         for (let id in updatedInventory) {
+            
             formIsValid = updatedInventory[id].valid && formIsValid;
+            console.log(updatedInventory[id], formIsValid)
+          
         }
         this.setState({beers: updatedInventory, formIsValid: formIsValid});  
 }
@@ -174,6 +192,8 @@ render(){
             
         }
         <button>Submit</button>
+
+        
        </form>
     )
 
@@ -199,6 +219,7 @@ render(){
 //        </div> 
         }
 
+            <div>{this.state.allRequired}</div>
 
         </div>
     )

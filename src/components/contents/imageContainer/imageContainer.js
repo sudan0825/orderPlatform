@@ -1,13 +1,16 @@
 import React from 'react';
 import myStyle from './imageContainer.css';
-import budweiser from '../../../assets/budweiser.jpeg'
 
-const imageContainer=(props)=>(
+
+const imageContainer=(props)=>{
+   
+    return (
     <div className={myStyle.imageContainer}>
-     
+       
                
-        <div className={myStyle.image}><img src={budweiser} alt='budweiser'/></div>
+        <div className={myStyle.image}><img src={props.image} alt='production pic'/></div>
                   
    </div>)
+        }
     
 export default imageContainer;

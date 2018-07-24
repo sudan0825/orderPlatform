@@ -21,10 +21,10 @@ class App extends Component {
         const order={
             t:"a"
         }
-        axios.post('/orders.json', order).then((req)=>{
-        console.log(req)
-    }).catch(error=> console.log(error));
-    }
+//        axios.post('/orders.json', order).then((req)=>{
+//        console.log(req)
+//    }).catch(error=> console.log(error));
+   }
   render() {
     return (
          <BrowserRouter>

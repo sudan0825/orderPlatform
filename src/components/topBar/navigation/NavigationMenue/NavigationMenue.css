@@ -19,3 +19,14 @@
     margin: 10px;
     font-size: 18px;
 }
+
+.NavigationMenue a, .NavigationMenue a:visited{
+    text-decoration: none;
+    color:black;
+}
+.NavigationMenue a:hover{
+    color: aqua;
+}
+
+
+

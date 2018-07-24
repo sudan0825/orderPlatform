@@ -1,0 +1,72 @@
+.UpdateInfo{
+    width: 80%;
+    min-height: 400px;
+    
+    margin: 50px auto;
+    box-sizing: border-box;
+    border: 6px ridge #bbe4ed;
+}
+.leftImg{
+    float: left;
+    display: inline-block;
+    width: 45%;
+  
+   
+}
+.leftImg>div{
+    width: 80%;
+    box-sizing: border-box;
+    padding-top: 25%;
+    position: relative;
+    margin: 10% auto;
+    height: 230px;
+    border-radius: 18px;
+    background-color: whitesmoke;
+    
+}
+.rightInfo{
+  
+    display: inline-block;
+    width: 53%;
+    height: inherit;
+    
+ 
+}
+.rightInfo label{
+ font-weight: bold;
+  display: block
+    
+}
+
+.rightInfo div{
+    margin: 10px;
+    
+}
+.rightInfo input{
+    width: 280px;
+    height: 22px;
+}
+textArea{
+    height: 180px;
+    width: 280px;
+}
+.UpdateInfo button{
+    width: 80px;
+    height: 30px;
+    font-size: 18px;
+    text-align: left;
+    border-radius: 8px;
+    margin: 10px;
+    
+  
+}
+
+@media only screen and (max-width:850px){
+    .leftImg, .rightInfo{
+        width: 80%;
+        display: block;
+        margin: auto;
+        float: none;
+    }
+}
+

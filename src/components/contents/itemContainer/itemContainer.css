@@ -5,3 +5,22 @@
     overflow: auto;
     border: 6px ridge #bbe4ed;
 }
+.itemContainer button{
+    width: 50px;
+    height: 50px;
+    font-size: 40px;
+    border-radius: 50%;
+    margin: 5%;
+}
+
+
+.itemContainer button:nth-child(even){
+    background-color: #e04231;
+}
+
+.itemContainer button:nth-child(odd){
+    background-color: #36bc36;
+}
+.itemContainer button p{
+    margin: auto;
+}

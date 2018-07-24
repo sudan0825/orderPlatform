@@ -5,10 +5,15 @@ import ActionContainer from '../actionContainer/actionContainer';
 import ImageContainer from '../imageContainer/imageContainer';
 
 
+
 const itemContainer=(props)=>(
     <div className={myStyle.itemContainer}>
      <ImageContainer/>
-    <ActionContainer/>
+    <ActionContainer 
+    plus="+"
+    minus="-"
+    />
+  
    
             
                   

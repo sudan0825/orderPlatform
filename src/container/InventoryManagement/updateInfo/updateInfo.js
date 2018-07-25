@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import myStyle from './updateInfo.css';
 import Input from '../../../components/UI/input/input';
-
-import FileUploader from "react-firebase-file-uploader";
-
 import axios from '../../../axios';
-import a from 'axios';
-import firebase from "firebase";
+import firebase from "firebase/app";
+import 'firebase/database';
+import 'firebase/storage';
+
 
 
 
@@ -94,58 +93,83 @@ class UpdateInfo extends Component{
             }
         },
         formIsValid:true,
-        
+
         allRequired:""
     }
 
 addNewProductionHandler=(event)=>{
+
+
     event.preventDefault();
-    if(!this.state.formIsValid||!this.state.beers.name.value){
 
-        this.setState({allRequired:"All field are required"})
-        return 
-    }
+
+        if(!this.state.formIsValid||!this.state.beers.name.value){
+    
+            this.setState({allRequired:"All field are required"})
+            return 
+        }
     this.setState({allRequired:""})
-    console.log(this.state.beers.image.imgFile)
-    
-    
+
     const storageRef=firebase.storage().ref("images").child(this.state.beers.image.imgFile.name)
-    
-    const uploadtask=storageRef.put(this.state.beers.image.imgFile)
-    const  setURLtask=storageRef.getDownloadURL()
-                     .then(url =>{
-                         
-                          const updatedInventory = {
-                          ...this.state.beers
-                           };
-                          updatedInventory.image.imgURL=url;
-                         console.log("url",updatedInventory.image.imgURL)
+  let context=this;
+    const uploadtask=storageRef.put(this.state.beers.image.imgFile);
+    //after uploadt task finished, get URL
+    uploadtask.on(firebase.storage.TaskEvent.STATE_CHANGED, 
+                  function(snapshot){},function(error){},
+                  function(){
+        storageRef.getDownloadURL()
+        .then(url =>{
+
+            const inventory= {};
+
+            for (let key in context.state.beers) {
+                if(key==='image') {
+                    inventory[key]=url;
+                }else{
+                    inventory[key] = context.state.beers[key].value; 
+                }
+
+            }
+         
+            axios.post( '/inventory.json', inventory )
+                .then( response => {
+                const updatedInventory = {
+                    ...context.state.beers
+                };
+                for(let id in  updatedInventory ){
+                    const updatedInventoryElement = { 
+                        ...updatedInventory[id]
+                    };
+                    updatedInventoryElement.value = ""; 
+                    updatedInventoryElement.valid = false;
+                    updatedInventoryElement.touched = false;
 
 
-                         this.setState({beers: updatedInventory});
-                     } )
-    
-    
-    
-   
-    const inventory= {};
-    for (let key in this.state.beers) {
+                    if(id==='image'){
+                        updatedInventoryElement.imgFile=" "
+                    }
+                    updatedInventory[id] = updatedInventoryElement;
 
-        inventory[key] = this.state.beers[key].value;
-        this.state.beers[key].value=""
-
-    }
-     
-    axios.post( '/inventory.json', inventory )
-        .then( response => {
+                }
+                context.setState({beers: updatedInventory, formIsValid: true}); 
+            } )
+                .catch( error => {
+                console.log("somthing wrong with store data to database")
+                console.log(error)
+            } );
 
 
-    } )
-        .catch( error => {
-        console.log(error)
-    } ); 
+        } ).catch(error=>{
+            console.log("Somthing wrong with get image url from storage")
+            console.log(error)
+        })
+
+
+        })
+
+
+
 }
-
 
 checkValidity(value, rules) {
     let isValid = true;
@@ -182,16 +206,17 @@ inputChangeHandler=(event, id)=>{
     updatedInventoryElement.value = event.target.value; 
     updatedInventoryElement.valid = this.checkValidity(updatedInventoryElement.value, updatedInventoryElement.validation);
     updatedInventoryElement.touched = true;
-    updatedInventory[id] = updatedInventoryElement;
-    
+
+
     if(id==='image'){
         updatedInventoryElement.imgFile=event.target.files[0]
     }
+    updatedInventory[id] = updatedInventoryElement;
     let formIsValid = true;
     for (let id in updatedInventory) {
 
         formIsValid = updatedInventory[id].valid && formIsValid;
-     
+
 
     }
     this.setState({beers: updatedInventory, formIsValid: formIsValid});  
@@ -210,6 +235,8 @@ render(){
 
     let form=(
         <form onSubmit={this.addNewProductionHandler}>
+
+
         <h3>Add New Production</h3>
         {formElementArray.map(elem=>(
         <Input key={elem.id}
@@ -222,32 +249,25 @@ render(){
         label={elem.id}
         changed={(event)=>this.inputChangeHandler(event, elem.id)} 
 
-        />
-    )
-   
-
-
-    )
-
-
-    }
+/>
+))}
     <button>Submit</button>
 
 
-    </form>
-    )
+</form>
+)
 
-    return(
+return(
 
-        <div className={myStyle.UpdateInfo}>
+    <div className={myStyle.UpdateInfo}>
 
-        {form}
-      
+    {form}
 
-        <div>{this.state.allRequired}</div>
 
-        </div>
-    )
+    <div>{this.state.allRequired}</div>
+
+    </div>
+)
 }
 
 }

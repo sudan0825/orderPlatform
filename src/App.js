@@ -5,7 +5,7 @@ import NavigationMenue from './components/topBar/navigation/NavigationMenue/Navi
 import TopBar from './components/topBar/topBar';
 import Footer from './components/footer/footer';
 import Contents from './components/contents/contents';
-import axios from './axios';
+//import axios from './axios';
 
 
 
@@ -18,9 +18,6 @@ class App extends Component {
     
     componentDidMount(){
         
-        const order={
-            t:"a"
-        }
 //        axios.post('/orders.json', order).then((req)=>{
 //        console.log(req)
 //    }).catch(error=> console.log(error));

@@ -1,8 +1,6 @@
 import React from 'react';
 import myStyle from './contents.css'
-import { Route, Switch, Redirect } from 'react-router-dom';
-import ItemContainer from './itemContainer/itemContainer';
-import Orders from '../orders/orders';
+import { Route, Switch} from 'react-router-dom';
 import InventoryManagement from '../../container/InventoryManagement/InventoryManagement';
 import LoadMenu from '../../container/LoadMenu/LoadMenu';
 import OrderSummary from '../../container/OrderSummary/OrderSummary'

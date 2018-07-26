@@ -1,4 +1,5 @@
 .NavigationMenue{
+    display: inline-block;
     position: absolute;
     left:0;
     bottom: 0;
@@ -6,6 +7,7 @@
 }
 
 .NavigationMenue ul{
+
     list-style-type: none;
     margin: 0 30px;
     text-align: left;
@@ -22,7 +24,7 @@
 
 .NavigationMenue a, .NavigationMenue a:visited{
     text-decoration: none;
-    color:black;
+    color: white;
 }
 .NavigationMenue a:hover{
     color: aqua;

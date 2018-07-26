@@ -4,7 +4,29 @@
     width: 60%;
    
    
+   
     
 }
-
-
+.buttonDiv{
+    display: flex;
+    margin: auto;
+    width: 200px;
+}
+.buttonDiv div{
+    height: 45px;
+    width: 100px;
+    background-color: azure;
+    border-radius: 5px;
+    padding-top: 10px;
+    font-size: 18px;
+    margin:5px 15px;
+    box-sizing: border-box;
+}
+.buttonDiv button{
+    width: 45px;
+    height: 45px;
+    font-size: 30px;
+    border-radius: 50%;
+ 
+    background-color:#89b3bc;
+}

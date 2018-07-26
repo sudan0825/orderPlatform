@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import myStyle from './NavigationMenue.css';
 
 
-import NavigationItems from '../NavigationItems/NavigationItems'
+import NavigationItems from '../NavigationItems/NavigationItems';
+
 
 
 class navigationMenue extends Component{
@@ -18,6 +19,7 @@ class navigationMenue extends Component{
     <div className={myStyle.NavigationMenue}>
         
       <ul>{this.nvItems}</ul>
+       
    </div>)
 }
     

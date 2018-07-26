@@ -7,8 +7,12 @@ const actionContainer=(props)=>(
     
             <p>{props.description}</p>
     <p ><b>Price:</b> {props.price} </p>
-    <button>{props.plus}</button>
-    <button>{props.minus}</button>
+    <div className={myStyle.buttonDiv}> 
+    <button onClick={props.more} disabled={props.dplus}>{props.plus}</button>
+    <div>{props.count}</div>
+    <button onClick={props.less} disabled={props.dmin}>{props.minus}</button>
+    </div>
+   
                   
    </div>)
     

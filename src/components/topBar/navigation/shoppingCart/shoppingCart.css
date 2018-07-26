@@ -1,0 +1,36 @@
+.shoppingCart{
+    position: absolute;
+    right: 10px;
+    bottom:5px;
+    display: inline-block;
+    
+    overflow: visible;
+    
+}
+.rect{
+ 
+    padding: 10px 25px;
+    background-color:#4a747c;
+    border-radius: 5px;
+}
+
+.circle{
+
+    position: absolute;
+    right: 0;
+    padding-top: 6px;
+    bottom: 25px;
+    width: 30px;
+    height: 30px;
+    background-color: red;
+    border-radius: 50%;
+    box-sizing: border-box;
+    display: none;
+}
+.shoppingCart a{
+    text-decoration: none;
+    color: white;
+}
+.shoppingCart a:hover{
+    color: aqua;
+}

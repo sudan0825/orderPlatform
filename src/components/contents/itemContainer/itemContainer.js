@@ -14,7 +14,11 @@ const itemContainer=(props)=>(
     price={props.price}
     name={props.name}
     description={props.description}
-    
+    more={props.more}
+    less={props.less}
+    count={props.count}
+    dplus={props.dplus}
+    dmin={props.dmin}
     plus="+"
     minus="-"
     >{props.children}</ActionContainer>

@@ -4,7 +4,10 @@ import React, { Component } from "react";
  
 class OrderSummary extends Component {
   render(){
-      return (<h1>order summary</h1>)
+      console.log(this.props)
+      
+      
+      return (<h1>Time to check it out</h1>)
   }
 }
  

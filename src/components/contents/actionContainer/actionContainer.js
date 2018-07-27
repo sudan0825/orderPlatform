@@ -11,8 +11,9 @@ const actionContainer=(props)=>(
     <button onClick={props.more} disabled={props.dplus}>{props.plus}</button>
     <div>{props.count}</div>
     <button onClick={props.less} disabled={props.dmin}>{props.minus}</button>
+    
     </div>
-   
+   <button onClick={props.addToCart} disabled={props.dmin} >Add </button>
                   
    </div>)
     

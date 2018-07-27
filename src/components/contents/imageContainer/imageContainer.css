@@ -2,7 +2,8 @@
     width: 40%;
     height: inherit;
     display: inline-block;
-    float: left
+    float: left;
+    overflow: auto;
 }
 
 .image{
@@ -10,11 +11,13 @@
     width: 80%;
     margin: auto;
     top: 25px;
-    height: 250px;
+    height: 100%;
     background: white;
 }
 
 .image img{
-    height: 250px;
+    
     width: auto;
+    height: 280px;
+
 }

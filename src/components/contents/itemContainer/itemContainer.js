@@ -19,6 +19,7 @@ const itemContainer=(props)=>(
     count={props.count}
     dplus={props.dplus}
     dmin={props.dmin}
+    addToCart={props.addToCart}
     plus="+"
     minus="-"
     >{props.children}</ActionContainer>

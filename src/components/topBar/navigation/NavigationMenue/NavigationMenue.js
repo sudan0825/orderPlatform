@@ -9,7 +9,7 @@ import NavigationItems from '../NavigationItems/NavigationItems';
 class navigationMenue extends Component{
     
     state={
-        menue:["Menue", "Orders", "InventoryManagement"]
+        menue:["Menu", "Orders", "InventoryManagement"]
     }
     nvItems=this.state.menue.map((item)=>{
      

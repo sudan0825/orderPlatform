@@ -1,0 +1,8 @@
+.sideOrderSummary{
+    width: 300px;
+    height: 100%;
+    background-color: beige;
+    position: fixed;
+    top: 0;
+    right: 0;
+}

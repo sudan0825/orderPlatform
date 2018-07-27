@@ -10,7 +10,8 @@ const imageContainer=(props)=>{
                
         <div className={myStyle.image}><img src={props.image} alt='production pic'/></div>
                   
-   </div>)
+   </div>
+    )
         }
     
 export default imageContainer;

@@ -4,7 +4,7 @@ import ItemContainer from '../../components/contents/itemContainer/itemContainer
 import SideOrderSummary from '../../components/contents/sideSummary/sideOrderSummary/sideOrderSummary';
 import SosItemContainer from '../../components/contents/sideSummary/sosItemContainer/sosItemContainer';
 import Backdrop from '../../components/UI/backDrop/backDrop';
-import OrderSummary from '../OrderSummary/OrderSummary';
+
 
 import axios from '../../axios';
 import { Route } from 'react-router-dom';
@@ -16,11 +16,11 @@ class LoadMenu extends Component {
     state ={
         beers:{},
         totalPrice:0,
-        totalNumber:0,
         show:false,
         orders:[]
 
     }
+
 componentWillMount(){
     axios.get('/inventory.json').then(res=>{
 
@@ -55,7 +55,7 @@ add=(key)=>{
 
         orderItem.count+=1; 
     
-        cost+=orderItem.price;
+        cost+=Number(orderItem.price);
     }
 
     if(orderItem.count===Number(orderItem.inventory)){
@@ -81,14 +81,14 @@ minus=(key)=>{
     if(orderItem.count>0){
         orderItem.count-=1; 
        
-        cost-=orderItem.price;
+        cost-=Number(orderItem.price);
     }
     if(orderItem.count<orderItem.inventory) orderItem.disablePlus=false;
     if(orderItem.count===0)orderItem.disableMinus=true;
 
     UpdatedOrder[key]=orderItem;
     this.setState({beers:UpdatedOrder,totalPrice:this.state.totalPrice+cost});
-    console.log(this.state.totalNumber);
+   
 }
 
 
@@ -110,18 +110,17 @@ addToCart=(order)=>{
             name:"",
             count:0,
             image:"",
-            date:""
+           
         }
         for (let key in updatedOrders){
-            if(key==="date"){
-                updatedOrders[key]=new Date();
-            }else{
+    
                 updatedOrders[key]=order[key] 
-            }
+            
 
         }
         copyOfOldOrder=copyOfOldOrder.concat(updatedOrders);
     }
+    
 
 
 
@@ -131,7 +130,7 @@ addToCart=(order)=>{
 
 }
 
-
+//remove orders from side order summary
 removeFOS=(i)=>{
 
     let changeOrders=[...this.state.orders];
@@ -161,17 +160,27 @@ changeNumber=()=>{
 }
 //continue to check out
 checkout=()=>{
+    //pass the data to parent
+   
+ 
+    this.props.getChildrenProps(this.state);
+    this.props.history.push({pathname:'/checkout'});
     
-      const queryParams = [];
-        for (let i in this.state.orders) {
-            queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.state.orders[i]));
-        }
-        queryParams.push('price=' + this.state.totalPrice);
-        const queryString = queryParams.join('&');
-        this.props.history.push({
-            pathname: '/checkout',
-            search: '?' + queryString
-        });
+
+    
+    
+    //pass value through route
+//    console.log(this.state.totalPrice)
+//      const queryParams = [];
+//        for (let i in this.state.orders) {
+//            queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.state.orders[i]));
+//        }
+//        queryParams.push('price=' + this.state.totalPrice);
+//        const queryString = queryParams.join('&');
+//        this.props.history.push({
+//            pathname: '/checkout',
+//            search: '?' + queryString
+//        });
       
     //this.props.history.replace( '/checkout' )
 }
@@ -240,20 +249,9 @@ return (
     {orders}
     </SideOrderSummary>
     </Backdrop>
-    {/*set route to component*/}
+ 
 
-    <Route
-
-    path='/checkout'
-    render={(props)=>(
-    <OrderSummary 
-    orders={this.state.orders} 
-    price={this.state.totalPrice} 
-    {...props}/>
-
-
-)}
-/>    
+ 
 
 <h1>Menu</h1>
 {items}

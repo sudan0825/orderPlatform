@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import myStyle from './InventoryManagement.css';
 import UpdateInfo from './updateInfo/updateInfo';
-import Inventory from '../../components/contents/inventory/inventory';
+//import Inventory from '../../components/contents/inventory/inventory';
 
 
 
@@ -14,7 +14,7 @@ class InventoryManagement extends Component {
         
         return (<div className={myStyle.InventoryManagement}>
                 <UpdateInfo />
-                <Inventory/>
+               
                 </div>)
     }
 }

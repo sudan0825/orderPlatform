@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Backdrop from './components/hoc/Backdrop/Backdrop'
+
 import myStyle from './App.css';
 
 import TopBar from './components/topBar/topBar';
@@ -15,7 +15,7 @@ import { BrowserRouter } from 'react-router-dom';
 
 
 class App extends Component {
-    
+
     componentDidMount(){
         
 //        axios.post('/orders.json', order).then((req)=>{
@@ -26,15 +26,9 @@ class App extends Component {
     return (
          <BrowserRouter>
       <div className={myStyle.App}>
-       <TopBar/>
-        
-      
-        
-   
+       <TopBar/> 
        
-        <Backdrop>  </Backdrop>
-       
-        <Contents/>
+        <Contents />
        
         <Footer/>
      

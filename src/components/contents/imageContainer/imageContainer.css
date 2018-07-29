@@ -1,8 +1,9 @@
 .imageContainer{
     width: 40%;
-    height: inherit;
+    min-height: 300px;
     display: inline-block;
     float: left;
+    
     overflow: auto;
 }
 
@@ -12,12 +13,22 @@
     margin: auto;
     top: 25px;
     height: 100%;
+    border: 2px groove #acdeef;
+    border-radius: 8px;
     background: white;
 }
 
+
 .image img{
     
-    width: auto;
-    height: 280px;
+    width: 30%;
+    height: 200px;
+
+}
+
+.image img:hover{
+    
+    width: 35%;
+    height: 220px;
 
 }

@@ -1,6 +1,6 @@
 .sosItemContainer{
     width: 70%;
-    height: 120px;;
+    min-height: 140px;
     background-color: white;
     margin: 30px auto;
     clear: both;
@@ -37,7 +37,7 @@ h4{
     
 }
 img{
-    width: auto;
+    width: 50%;
     height: 80%;
 }
 

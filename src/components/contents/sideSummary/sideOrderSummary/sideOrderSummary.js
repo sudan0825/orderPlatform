@@ -5,7 +5,7 @@ import myStyle from './sideOrderSummary.css';
 const sideOrderSummary = (props)=>{
     
     return (
-    <div className={myStyle.sideOrderSummary}>
+    <div className={myStyle.sideOrderSummary} onClick={props.clickSOS}>
         <h3>Order Summary</h3>
         
         

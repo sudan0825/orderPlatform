@@ -8,8 +8,8 @@ const sosItemContainer = (props)=>{
         <div className={myStyle.image}><img src={props.image} alt='production pic'/></div>
         <div>
          <h4>{props.name}</h4>
-        <input type="number" value={props.number} onChange={props.change}/>
-        <button onClick={props.removeFOS}>Remove</button>
+        <p>Bottles: {props.number}</p>
+        <button onClick={(e)=>props.removeFOS(e)}>Remove</button>
         </div>
 
 

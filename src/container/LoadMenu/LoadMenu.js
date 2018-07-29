@@ -133,7 +133,9 @@ addToCart=(order)=>{
 }
 
 //remove orders from side order summary
-removeFOS=(i)=>{
+removeFOS=(event, i)=>{
+    
+   event.stopPropagation() 
 
     let changeOrders=[...this.state.orders];
 
@@ -156,21 +158,22 @@ removeFOS=(i)=>{
     this.setState({orders:changeOrders,beers:changeBeers})
     console.log(this.state.beers)
 }
-//change the input number in side order summary
-changeNumber=()=>{
 
+
+clickBackDrop=(event)=>{
+    
+    console.log(event.target)
+
+    this.setState({show:!this.state.show})
 }
 //continue to check out
-checkout=()=>{
+checkout=(event)=>{
     //pass the data to parent
-   
+   event.stopPropagation();
+
  
     this.props.getChildrenProps(this.state);
     this.props.history.push({pathname:'/checkout'});
-    
-
-    
-    
     //pass value through route
 //    console.log(this.state.totalPrice)
 //      const queryParams = [];
@@ -189,6 +192,11 @@ checkout=()=>{
 
 continue=()=>{
     this.setState({show:false})
+}
+clickSOS=(e)=>{
+      e.stopPropagation();
+ ;
+    
 }
 render(){
 
@@ -211,6 +219,7 @@ render(){
         dplus={this.state.beers[key].disablePlus}
         dmin={this.state.beers[key].disableMinus}
         addToCart={()=>this.addToCart({...this.state.beers[key]})}
+        
     />)
 }
 }
@@ -226,8 +235,8 @@ if(this.state.orders.length){
             name={order.name}
             image={order.image}
             number={order.count}
-            change={this.changeNumber}
-            removeFOS={()=>this.removeFOS(i)}
+          
+            removeFOS={(e)=>this.removeFOS(e,i)}
 
                               />)  
 
@@ -242,10 +251,13 @@ return (
     <div className={myStyle.LoadMenu}>
 
     {/*side order summary*/}
-    <Backdrop show={this.state.show}>
+    <Backdrop 
+       show={this.state.show}
+       clickBackDrop={this.clickBackDrop}>
     <SideOrderSummary 
     checkout={this.checkout}
-    continue={this.continue}>
+    continue={this.continue}
+    clickSOS={this.clickSOS}>
     {orders}
     </SideOrderSummary>
     </Backdrop>

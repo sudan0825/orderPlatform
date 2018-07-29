@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import myStyle from './Orders.css';
+import myStyle from './orders.css';
 import OrderItem from '../../components/orders/orders'
 import axios from '../../axios';
 

@@ -4,7 +4,7 @@ import { Route, Switch} from 'react-router-dom';
 import InventoryManagement from '../../container/InventoryManagement/InventoryManagement';
 import LoadMenu from '../../container/LoadMenu/LoadMenu';
 import CheckOut from '../../container/CheckOut/CheckOut';
-import Orders from '../../container/orders/Orders';
+import Orders from '../../container/orders/orders';
 
 
 class contents extends Component{

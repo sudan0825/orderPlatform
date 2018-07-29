@@ -1,0 +1,14 @@
+.orders{
+     width: 90%;
+    min-height: 400px;
+    margin: 50px auto;
+    box-sizing: border-box;
+    border: 6px ridge #bbe4ed;
+    display: flex;
+    flex-wrap:wrap;
+    justify-content: space-around;
+    
+}
+.orders h1{
+    width: 100%;
+}

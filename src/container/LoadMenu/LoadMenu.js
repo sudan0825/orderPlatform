@@ -7,7 +7,7 @@ import Backdrop from '../../components/UI/backDrop/backDrop';
 
 
 import axios from '../../axios';
-import { Route } from 'react-router-dom';
+
 
 
 
@@ -20,7 +20,9 @@ class LoadMenu extends Component {
         orders:[]
 
     }
-
+ /* more--> add more beer, less--> decrease the number of order, count-->how many beers are order
+   dplus-->disable add button if the number of order reach inventory
+   dmin-->disable the minus button& addto the cart button if he number of order is equal to 0*/
 componentWillMount(){
     axios.get('/inventory.json').then(res=>{
 
@@ -139,8 +141,8 @@ removeFOS=(i)=>{
 
     //if remove a beer from side order summary, set the number of count to 0;
     for(let key in changeBeers){
-        changeBeers[key].name;
-        if(changeBeers[key].name==changeOrders[i].name){  
+       
+        if(changeBeers[key].name===changeOrders[i].name){  
             changeBeers[key].count=0;
             changeBeers[key].disableMinus=true;
             break;
@@ -191,9 +193,7 @@ continue=()=>{
 render(){
 
     const items= [];
- {/* more--> add more beer, less--> decrease the number of order, count-->how many beers are order
-   dplus-->disable add button if the number of order reach inventory
-   dmin-->disable the minus button& addto the cart button if he number of order is equal to 0*/}
+
     if(this.state.beers){
 
         for(let key in this.state.beers){

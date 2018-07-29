@@ -1,6 +1,6 @@
 import React from 'react';
 import myStyle from './sideOrderSummary.css';
-import SosItemContainer from '../sosItemContainer/sosItemContainer'
+
 
 const sideOrderSummary = (props)=>{
     

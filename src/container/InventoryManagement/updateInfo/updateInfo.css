@@ -57,6 +57,8 @@ textArea{
     text-align: left;
     border-radius: 8px;
     margin: 10px;
+    color: aliceblue;
+    background-color: orange;
     
   
 }
@@ -68,7 +70,7 @@ form{
     text-align: left;
     box-sizing: border-box;
 }
-form h3{
+form h1{
     text-align: center
 }
 form>div{

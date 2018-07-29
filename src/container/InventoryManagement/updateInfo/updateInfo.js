@@ -237,7 +237,7 @@ render(){
         <form onSubmit={this.addNewProductionHandler}>
 
 
-        <h3>Add New Production</h3>
+        <h1>Add New Production</h1>
         {formElementArray.map(elem=>(
         <Input key={elem.id}
         elemType={elem.config.elemType}

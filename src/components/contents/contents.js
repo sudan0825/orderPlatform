@@ -4,7 +4,7 @@ import { Route, Switch} from 'react-router-dom';
 import InventoryManagement from '../../container/InventoryManagement/InventoryManagement';
 import LoadMenu from '../../container/LoadMenu/LoadMenu';
 import CheckOut from '../../container/CheckOut/CheckOut';
-import Orders from '../../container/orders/orders';
+import Orders from '../../container/orders/Orders';
 
 
 class contents extends Component{
@@ -23,10 +23,10 @@ getChildrenProps=(dataFromChild)=>{
         if(data==="beers"){
             beers={...dataFromChild[data]}
         }
-        if(data=="totalPrice"){
+        if(data==="totalPrice"){
             totalPrice=dataFromChild[data];
         }
-        if(data=="orders") orders=[...dataFromChild[data]]
+        if(data==="orders") orders=[...dataFromChild[data]]
     }
   this.setState({beers:beers,orders:orders,totalPrice:totalPrice})
 }

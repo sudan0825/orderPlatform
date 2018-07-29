@@ -24,7 +24,7 @@ label::first-letter{
 
 .InputElement:focus {
     outline: none;
-    background-color: #ccc;
+    background-color: #f2f8f9;
 }
 
 .Invalid {

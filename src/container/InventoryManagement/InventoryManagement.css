@@ -7,6 +7,11 @@
     border: 6px ridge #bbe4ed;
 
 
-
-
+}
+.bt{
+    width: 60%;
+    float: right;
+}
+.bt button{
+    margin: 8px;
 }

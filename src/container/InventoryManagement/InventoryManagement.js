@@ -14,16 +14,18 @@ class InventoryManagement extends Component {
         inventory:{}
     }
 
+
+
 componentWillMount(){
 
     axios.get('/inventory.json').then(res=>{
-        console.log(res.data)
+        
         this.setState({inventory:res.data})
 
     })
 }
 
-delete=(i)=>{
+deleteItem=(i)=>{
    
    delete this.state.inventory[i];
     this.setState({inventory:this.state.inventory})
@@ -36,6 +38,11 @@ delete=(i)=>{
   
     
 }
+
+modifyItem=(i)=>{
+    console.log(i)
+  
+}
 render(){
 
   let productionList=[]
@@ -43,21 +50,28 @@ render(){
         for(let i in this.state.inventory){
 
             productionList.push(
-                <div key ={i} className={myStyle.productionList}>
+                <div key ={i} 
+                   className={myStyle.productionList}>
 
                 
                 <ImageContainer
                 image={this.state.inventory[i].image}/>
+                
                 <Description 
                 price={this.state.inventory[i].price}
                 name={this.state.inventory[i].name}
                 inventory={this.state.inventory[i].inventory}
                 description={this.state.inventory[i].description}
+            
                 
                 
 
                 />
-                 <Button clickButton={()=>this.delete(i)}>Delete</Button>
+                
+                <div className={myStyle.bt}>
+                 <Button clickButton={()=>this.modifyItem(this.state.inventory[i])} buttonValue="Modify"></Button>
+                 <Button clickButton={()=>this.deleteItem(i)} buttonValue="Delete"></Button>
+                </div>
 
 
 

@@ -44,10 +44,9 @@ cancel=()=>{
 
 //check out & store everything
 checkout=()=>{
-    let date=new Date();
-    let orderDate=date.getMonth()+"/"+date.getDate()+"/"+date.getFullYear();
+  
  
-    let orders=[this.state.orders,this.state.totalPrice.toFixed(2),orderDate]
+    let orders=[this.state.orders,this.state.totalPrice.toFixed(2),new Date()]
       
     axios.post('/orders.json', orders).then((res)=>{
         console.log("post order to firebase database")

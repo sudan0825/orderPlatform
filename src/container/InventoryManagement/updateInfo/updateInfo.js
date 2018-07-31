@@ -1,6 +1,12 @@
+
 import React, { Component } from 'react';
 import myStyle from './updateInfo.css';
 import Input from '../../../components/UI/input/input';
+import Button from '../../../components/UI/buttons/buttons';
+
+
+
+
 import axios from '../../../axios';
 import firebase from "firebase/app";
 import 'firebase/database';
@@ -100,88 +106,136 @@ class UpdateInfo extends Component{
     }
 
 addNewProductionHandler=(event)=>{
-  //if item already exist, give an error report
-   axios.get( '/inventory.json').then((res)=>{
- 
-       const inventoryList=res.data;
-        
-       for(let iv in inventoryList){
-         
-           if(this.state.beers.name.value.toLowerCase()===inventoryList[iv].name.toLowerCase()){
-               this.setState({allRequired:"Item already exist"})
-            return 
-           }
-       }
-   })
     event.preventDefault();
 
 
-        if(!this.state.formIsValid||!this.state.beers.name.value){
-    
-            this.setState({allRequired:"All field are required"})
-            return 
+    //if item already exist, give an error report
+
+    axios.get( '/inventory.json').then((res)=>{
+
+        const inventoryList=res.data;
+
+        for(let iv in inventoryList){
+
+            if(this.state.beers.name.value.toLowerCase()===inventoryList[iv].name.toLowerCase()){
+
+                this.setState({allRequired:"Item already exist"})
+                return 
+            }
+
         }
-    this.setState({allRequired:""})
+        if(this.state.allRequired===""){
+            console.log("no the item", this.state.allRequired)
+            if(!this.state.formIsValid||!this.state.beers.name.value){
 
-    const storageRef=firebase.storage().ref("images").child(this.state.beers.image.imgFile.name)
-  let context=this;
-    const uploadtask=storageRef.put(this.state.beers.image.imgFile);
-    //after uploadt task finished, get URL
-    uploadtask.on(firebase.storage.TaskEvent.STATE_CHANGED, 
-                  function(snapshot){},function(error){},
-                  function(){
-        storageRef.getDownloadURL()
-        .then(url =>{
+                this.setState({allRequired:"All field are required"})
+                return 
+            }
+            this.setState({allRequired:""})
 
-            const inventory= {};
+            const storageRef=firebase.storage().ref("images").child(this.state.beers.image.imgFile.name)
+            let context=this;
+            const uploadtask=storageRef.put(this.state.beers.image.imgFile);
+            //after uploadt task finished, get URL
+            uploadtask.on(firebase.storage.TaskEvent.STATE_CHANGED, 
+                          function(snapshot){},function(error){},
+                          function(){
+                storageRef.getDownloadURL()
+                    .then(url =>{
 
-            for (let key in context.state.beers) {
-                if(key==='image') {
-                    inventory[key]=url;
-                }else{
-                    inventory[key] = context.state.beers[key].value; 
+                    const inventory= {};
+
+                    for (let key in context.state.beers) {
+                        if(key==='image') {
+                            inventory[key]=url;
+                        }else{
+                            inventory[key] = context.state.beers[key].value; 
+                        }
+
+                    }
+
+                    axios.post( '/inventory.json', inventory )
+                        .then( response => {
+                        const updatedInventory = {
+                            ...context.state.beers
+                        };
+                        //clear input field
+                        for(let id in  updatedInventory ){
+                            const updatedInventoryElement = { 
+                                ...updatedInventory[id]
+                            };
+                            updatedInventoryElement.value = ""; 
+                            updatedInventoryElement.valid = false;
+                            updatedInventoryElement.touched = false;
+
+
+                            if(id==='image'){
+                                updatedInventoryElement.imgFile=" "
+                            }
+                            updatedInventory[id] = updatedInventoryElement;
+
+                        }
+                        context.setState({beers: updatedInventory, formIsValid: true}); 
+                    } )
+                        .catch( error => {
+                        console.log("somthing wrong with store data to database")
+                        console.log(error)
+                    } );
+
+
+                } ).catch(error=>{
+                    console.log("Somthing wrong with get image url from storage")
+                    console.log(error)
+                })
+
+
+            })
+        }
+
+    })
+
+
+
+
+
+
+
+}
+
+//Modify inventory
+
+modifyItem=(event)=>{
+
+    event.preventDefault();
+
+
+
+
+    axios.get( '/inventory.json').then((res)=>{
+
+        const inventoryList=res.data;
+
+        for(let iv in inventoryList){
+
+
+            if(this.state.beers.name.value.toLowerCase()===inventoryList[iv].name.toLowerCase()){
+                let update=inventoryList[iv];
+                
+                for (let key in this.state.beers) {
+                    if(this.state.beers[key].value!==""){
+
+                        update[key] = this.state.beers[key].value; 
+                    }
+
+
+
                 }
+                axios.put('/inventory/'+iv+'.json', update)
 
             }
-         
-            axios.post( '/inventory.json', inventory )
-                .then( response => {
-                const updatedInventory = {
-                    ...context.state.beers
-                };
-                for(let id in  updatedInventory ){
-                    const updatedInventoryElement = { 
-                        ...updatedInventory[id]
-                    };
-                    updatedInventoryElement.value = ""; 
-                    updatedInventoryElement.valid = false;
-                    updatedInventoryElement.touched = false;
 
-
-                    if(id==='image'){
-                        updatedInventoryElement.imgFile=" "
-                    }
-                    updatedInventory[id] = updatedInventoryElement;
-
-                }
-                context.setState({beers: updatedInventory, formIsValid: true}); 
-            } )
-                .catch( error => {
-                console.log("somthing wrong with store data to database")
-                console.log(error)
-            } );
-
-
-        } ).catch(error=>{
-            console.log("Somthing wrong with get image url from storage")
-            console.log(error)
-        })
-
-
-        })
-
-
-
+        }
+    })
 }
 //validate input field
 checkValidity(value, rules) {
@@ -200,16 +254,16 @@ checkValidity(value, rules) {
         if(!pattern.test(value)){
             this.setState({isNum:"only number is allowed"})
         }
-       
-        
+
+
         isValid=pattern.test(value)&&isValid;
     }
 
     if (rules.isFloat) {
         const pattern = /^\d+.\d{2}$/;
-         if(!pattern.test(value)){
-             this.setState({ keep2D:"must keep two decimal"})
-         }
+        if(!pattern.test(value)){
+            this.setState({ keep2D:"must keep two decimal"})
+        }
         isValid = pattern.test(value) && isValid;
     }
 
@@ -223,7 +277,7 @@ inputChangeHandler=(event, id)=>{
     const updatedInventoryElement = { 
         ...updatedInventory[id]
     };
-
+    this.setState({allRequired:""})
     updatedInventoryElement.value = event.target.value; 
     updatedInventoryElement.valid = this.checkValidity(updatedInventoryElement.value, updatedInventoryElement.validation);
     updatedInventoryElement.touched = true;
@@ -276,7 +330,8 @@ render(){
 />
 
 ))}
-    <button>Submit</button>
+    <Button buttonValue="Submit" buttoneType="Submit"></Button>
+<Button clickButton={this.modifyItem} buttonValue="Modify" ></Button>
 
 
 </form>

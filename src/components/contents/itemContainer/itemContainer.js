@@ -16,6 +16,7 @@ const itemContainer=(props)=>(
     price={props.price}
     name={props.name}
     description={props.description}
+   
     
     />
     

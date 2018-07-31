@@ -9,12 +9,12 @@ const actionContainer=(props)=>(
     
          
     <div className={myStyle.buttonDiv}> 
-    <Button clickButton={props.more} disableButton={props.dplus}>{props.plus}</Button>
+    <Button clickButton={props.more} disableButton={props.dplus} buttonValue={props.plus}></Button>
     <div>{props.count}</div>
-    <Button clickButton={props.less} disableButton={props.dmin}>{props.minus}</Button>
+    <Button clickButton={props.less} disableButton={props.dmin} buttonValue={props.minus}></Button>
     
     </div>
-   <Button clickButton={props.addToCart} disableButton={props.dmin} >Add </Button>
+   <Button clickButton={props.addToCart} disableButton={props.dmin} buttonValue="Add"> </Button>
                   
    </div>)
     

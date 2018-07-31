@@ -30,10 +30,15 @@ render(){
     if(this.state.orders){
 
         for(let order in this.state.orders){
+            let date=new Date(this.state.orders[order][2])
+            let time=date.getMonth()+1+"/"+date.getDate()+
+                     "/"+date.getFullYear();
+         
+                     
             
                        dateOrder.push(<OrderItem 
-                          key = {this.state.orders[order][2]+this.state.orders[order][1]}
-                          date={this.state.orders[order][2]}
+                          key = {order[2]}
+                          date={time}
                           orderContent={this.state.orders[order][0]}
                           price={this.state.orders[order][1]}
                          

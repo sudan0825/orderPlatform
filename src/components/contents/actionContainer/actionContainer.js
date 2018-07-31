@@ -1,19 +1,20 @@
 import React from 'react';
-import myStyle from './actionContainer.css'
+import myStyle from './actionContainer.css';
+import Button from '../../UI/buttons/buttons';
+
 
 const actionContainer=(props)=>(
     <div className={myStyle.actionContainer}>
-    <h3>{props.name}</h3>
+   
     
-            <p>{props.description}</p>
-    <p ><b>Price:</b> {props.price} </p>
+         
     <div className={myStyle.buttonDiv}> 
-    <button onClick={props.more} disabled={props.dplus}>{props.plus}</button>
+    <Button clickButton={props.more} disableButton={props.dplus}>{props.plus}</Button>
     <div>{props.count}</div>
-    <button onClick={props.less} disabled={props.dmin}>{props.minus}</button>
+    <Button clickButton={props.less} disableButton={props.dmin}>{props.minus}</Button>
     
     </div>
-   <button onClick={props.addToCart} disabled={props.dmin} >Add </button>
+   <Button clickButton={props.addToCart} disableButton={props.dmin} >Add </Button>
                   
    </div>)
     

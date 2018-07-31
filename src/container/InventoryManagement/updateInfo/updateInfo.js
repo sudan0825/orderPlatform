@@ -94,12 +94,25 @@ class UpdateInfo extends Component{
         },
         formIsValid:true,
 
-        allRequired:""
+        allRequired:"",
+        keep2D:"",
+        isNum:""
     }
 
 addNewProductionHandler=(event)=>{
-
-
+  //if item already exist, give an error report
+   axios.get( '/inventory.json').then((res)=>{
+ 
+       const inventoryList=res.data;
+        
+       for(let iv in inventoryList){
+         
+           if(this.state.beers.name.value.toLowerCase()===inventoryList[iv].name.toLowerCase()){
+               this.setState({allRequired:"Item already exist"})
+            return 
+           }
+       }
+   })
     event.preventDefault();
 
 
@@ -170,7 +183,7 @@ addNewProductionHandler=(event)=>{
 
 
 }
-
+//validate input field
 checkValidity(value, rules) {
     let isValid = true;
     if (!rules) {
@@ -184,17 +197,25 @@ checkValidity(value, rules) {
 
     if(rules.isNumeric){
         const pattern=/^\d+$/;
+        if(!pattern.test(value)){
+            this.setState({isNum:"only number is allowed"})
+        }
+       
+        
         isValid=pattern.test(value)&&isValid;
     }
 
     if (rules.isFloat) {
         const pattern = /^\d+.\d{2}$/;
+         if(!pattern.test(value)){
+             this.setState({ keep2D:"must keep two decimal"})
+         }
         isValid = pattern.test(value) && isValid;
     }
 
     return isValid;
 }
-
+//check input change 
 inputChangeHandler=(event, id)=>{
     const updatedInventory = {
         ...this.state.beers
@@ -206,6 +227,7 @@ inputChangeHandler=(event, id)=>{
     updatedInventoryElement.value = event.target.value; 
     updatedInventoryElement.valid = this.checkValidity(updatedInventoryElement.value, updatedInventoryElement.validation);
     updatedInventoryElement.touched = true;
+    this.setState({allRequired:""})
 
 
     if(id==='image'){
@@ -247,9 +269,12 @@ render(){
         shouldValidate={elem.config.validation}
         touched={elem.config.touched}
         label={elem.id}
+        keep2D={this.state.keep2D}
+        isNum={this.state.isNum}
         changed={(event)=>this.inputChangeHandler(event, elem.id)} 
 
 />
+
 ))}
     <button>Submit</button>
 
@@ -264,7 +289,7 @@ return(
     {form}
 
 
-    <div>{this.state.allRequired}</div>
+    <div style={{color:'red'}}>{this.state.allRequired}</div>
 
     </div>
 )

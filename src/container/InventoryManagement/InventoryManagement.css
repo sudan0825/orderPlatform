@@ -1,5 +1,12 @@
+.productionList{
+
+    width: 80%;
+    min-height: 300px;
+    margin: 15px auto;
+    overflow: auto;
+    border: 6px ridge #bbe4ed;
 
 
-form{
+
 
 }

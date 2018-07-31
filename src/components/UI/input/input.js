@@ -33,6 +33,8 @@ const input=(props)=>{
             return (
             <div className={myStyle.Input}>
                 <label className={myStyle.Label}>{props.label} </label>
+                {props.label==="Price"?<div style={{color:'red'}}>{props.keep2D}</div>:null}
+                {props.label==="Inventory"?<div style={{color:'red'}}>{props.isNum}</div>:null}
                 {inputElement}
                 
                 </div>

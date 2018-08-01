@@ -1,4 +1,4 @@
-.orders{
+.ordersList{
      width: 90%;
     min-height: 400px;
     margin: 50px auto;
@@ -9,6 +9,22 @@
     justify-content: space-around;
     
 }
-.orders h1{
-    width: 100%;
+.orders input{
+   width: 180px;
+    height: 30px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #e8eef7;
+    margin: auto 48px;
+}
+.orders button{
+    
+    width: 100px;
+    height: 30px;
+    margin-top: 16px;
+    border-radius: 5px;
+    font-size: 16px;
+    color: aliceblue;
+    background-color: orange;
+    margin-left: 48px
 }

@@ -232,6 +232,8 @@ modifyItem=(event)=>{
                 }
                 axios.put('/inventory/'+iv+'.json', update)
 
+            }else{
+                this.setState({allRequired:"The item does not exist in the inventory"})
             }
 
         }
@@ -281,7 +283,7 @@ inputChangeHandler=(event, id)=>{
     updatedInventoryElement.value = event.target.value; 
     updatedInventoryElement.valid = this.checkValidity(updatedInventoryElement.value, updatedInventoryElement.validation);
     updatedInventoryElement.touched = true;
-    this.setState({allRequired:""})
+    
 
 
     if(id==='image'){

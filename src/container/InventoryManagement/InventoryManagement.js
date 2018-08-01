@@ -11,7 +11,15 @@ import Button from '../../components/UI/buttons/buttons';
 
 class InventoryManagement extends Component {
     state={
-        inventory:{}
+        inventory:{},
+        item:{
+            name:"",
+            description:"",
+            price:"",
+            inventory:"",
+            image:""
+            
+        }
     }
 
 
@@ -39,8 +47,17 @@ deleteItem=(i)=>{
     
 }
 
-modifyItem=(i)=>{
-    console.log(i)
+modifyItem=(product)=>{
+   let update={...this.state.item}
+    
+    for(let i in update){
+       
+        update[i]=product[i]
+       
+    }
+
+    this.setState({item:update})
+    
   
 }
 render(){
@@ -83,7 +100,13 @@ render(){
                 }
 
                 return (<div className={myStyle.InventoryManagement}>
-                <UpdateInfo />
+                <UpdateInfo 
+                       name={this.state.item.name}
+                       description={this.state.item.description}
+                       price={this.state.item.price}
+                       inventory={this.state.item.inventory}
+                       image={this.state.item.image}
+             />
                         <h1>Inventory List</h1>
                  {productionList}
 

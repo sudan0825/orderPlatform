@@ -17,3 +17,30 @@
     color:aliceblue;
     background-color: orange;
 }
+
+.checkoutdiv{
+    padding: 30px;
+    width: 50%;
+    border-radius: 6px;
+    box-shadow: 3px 3px 3px silver;
+    background-color: azure;
+    margin: auto;
+    min-height: 400px;
+ 
+  
+}
+.checkoutdiv p{
+ 
+    text-align: left;
+}
+
+.checkoutdiv p:last-child{
+    margin-top: 30px;
+}
+
+.checkoutdiv span{
+    display: inline-block;
+    width: 100px;
+    font-weight:bold;
+    
+}

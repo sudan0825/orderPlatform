@@ -60,10 +60,11 @@ checkout=()=>{
     for(let beer in inventoryList){
         for(let i in ordersList){
           if(inventoryList[beer].name===ordersList[i].name) {
-              console.log("name is same");
+              
               inventoryList[beer].inventory-=ordersList[i].count;
               console.log(  inventoryList[beer].inventory)
               axios.patch('/inventory/'+beer+'.json',{inventory:inventoryList[beer].inventory}).then((res)=>{
+                  console.log("Make order successfully and update inventory accordingly ");
                   console.log(res)
               }).catch(e=>{
                   console.log(e)
@@ -84,16 +85,17 @@ render(){
   if(this.state.orders.length){
      
       items=this.state.orders.map(order=>
-          (<p key={order.name} style={{textAlign:'left'}}><span style={{fontWeight:'bold', paddingLeft:'40%'}}> Name: </span> {order.name} x {order.count}</p>)
+          (<p key={order.name}><span > Name: </span> {order.name} x {order.count}</p>)
       )
      
   }
                        
     return ( <div className={myStyle.checkOut}>
             <h2>Check Out</h2>
-           
+           <div className={myStyle.checkoutdiv}>
             {items}
-           <p> <span style={{fontWeight:'bold'}}> Total Price: </span> {this.state.totalPrice.toFixed(2)}</p>
+           <p> <span> Total Price: </span> {this.state.totalPrice.toFixed(2)}</p>
+            </div>
             <button onClick={this.checkout}>Check Out</button>
             <button onClick={this.cancel}>Cancel</button>
             

@@ -68,7 +68,7 @@ render(){
             }else{
                 whichDate=true}
             
-             console.log(this.state.theDate===time)
+        
 
             if(whichDate){
                

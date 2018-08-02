@@ -20,7 +20,7 @@ class LoadMenu extends Component {
         orders:[]
 
     }
- /* more--> add more beer, less--> decrease the number of order, count-->how many beers are order
+/* more--> add more beer, less--> decrease the number of order, count-->how many beers are order
    dplus-->disable add button if the number of order reach inventory
    dmin-->disable the minus button& addto the cart button if he number of order is equal to 0*/
 componentWillMount(){
@@ -53,14 +53,15 @@ add=(key)=>{
         ...UpdatedOrder[key]
     }
 
-    if(orderItem.count<orderItem.inventory){
+    if(orderItem.inventory>orderItem.count){
 
         orderItem.count+=1; 
-    
+
         cost+=Number(orderItem.price);
+      
     }
 
-    if(orderItem.count===Number(orderItem.inventory)){
+    if(orderItem.count>=Number(orderItem.inventory)){
 
         orderItem.disablePlus=true;  
     } 
@@ -82,15 +83,18 @@ minus=(key)=>{
 
     if(orderItem.count>0){
         orderItem.count-=1; 
-       
+
         cost-=Number(orderItem.price);
+       
     }
-    if(orderItem.count<orderItem.inventory) orderItem.disablePlus=false;
+
+
+    if(orderItem.inventory>orderItem.count) orderItem.disablePlus=false;
     if(orderItem.count===0)orderItem.disableMinus=true;
 
     UpdatedOrder[key]=orderItem;
     this.setState({beers:UpdatedOrder,totalPrice:this.state.totalPrice+cost});
-   
+
 }
 
 
@@ -112,17 +116,17 @@ addToCart=(order)=>{
             name:"",
             count:0,
             image:"",
-           
+
         }
         for (let key in updatedOrders){
-    
-                updatedOrders[key]=order[key] 
-            
+
+            updatedOrders[key]=order[key] 
+
 
         }
         copyOfOldOrder=copyOfOldOrder.concat(updatedOrders);
     }
-    
+
 
 
 
@@ -134,8 +138,8 @@ addToCart=(order)=>{
 
 //remove orders from side order summary
 removeFOS=(event, i)=>{
-    
-   event.stopPropagation() 
+
+    event.stopPropagation() 
 
     let changeOrders=[...this.state.orders];
 
@@ -143,7 +147,7 @@ removeFOS=(event, i)=>{
 
     //if remove a beer from side order summary, set the number of count to 0;
     for(let key in changeBeers){
-       
+
         if(changeBeers[key].name===changeOrders[i].name){  
             changeBeers[key].count=0;
             changeBeers[key].disableMinus=true;
@@ -161,7 +165,7 @@ removeFOS=(event, i)=>{
 
 
 clickBackDrop=(event)=>{
-    
+
     console.log(event.target)
 
     this.setState({show:!this.state.show})
@@ -169,24 +173,24 @@ clickBackDrop=(event)=>{
 //continue to check out
 checkout=(event)=>{
     //pass the data to parent
-   event.stopPropagation();
+    event.stopPropagation();
 
- 
-    this.props.getChildrenProps(this.state);
+
+    this.props.passToparent(this.state);
     this.props.history.push({pathname:'/checkout'});
     //pass value through route
-//    console.log(this.state.totalPrice)
-//      const queryParams = [];
-//        for (let i in this.state.orders) {
-//            queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.state.orders[i]));
-//        }
-//        queryParams.push('price=' + this.state.totalPrice);
-//        const queryString = queryParams.join('&');
-//        this.props.history.push({
-//            pathname: '/checkout',
-//            search: '?' + queryString
-//        });
-      
+    //    console.log(this.state.totalPrice)
+    //      const queryParams = [];
+    //        for (let i in this.state.orders) {
+    //            queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.state.orders[i]));
+    //        }
+    //        queryParams.push('price=' + this.state.totalPrice);
+    //        const queryString = queryParams.join('&');
+    //        this.props.history.push({
+    //            pathname: '/checkout',
+    //            search: '?' + queryString
+    //        });
+
     //this.props.history.replace( '/checkout' )
 }
 
@@ -194,9 +198,9 @@ continue=()=>{
     this.setState({show:false})
 }
 clickSOS=(e)=>{
-      e.stopPropagation();
- ;
-    
+    e.stopPropagation();
+    ;
+
 }
 render(){
 
@@ -219,7 +223,7 @@ render(){
         dplus={this.state.beers[key].disablePlus}
         dmin={this.state.beers[key].disableMinus}
         addToCart={()=>this.addToCart({...this.state.beers[key]})}
-        
+
     />)
 }
 }
@@ -235,7 +239,7 @@ if(this.state.orders.length){
             name={order.name}
             image={order.image}
             number={order.count}
-          
+
             removeFOS={(e)=>this.removeFOS(e,i)}
 
                               />)  
@@ -252,8 +256,8 @@ return (
 
     {/*side order summary*/}
     <Backdrop 
-       show={this.state.show}
-       clickBackDrop={this.clickBackDrop}>
+    show={this.state.show}
+    clickBackDrop={this.clickBackDrop}>
     <SideOrderSummary 
     checkout={this.checkout}
     continue={this.continue}
@@ -261,16 +265,16 @@ return (
     {orders}
     </SideOrderSummary>
     </Backdrop>
- 
-
- 
-
-<h1>Menu</h1>
-{items}
 
 
 
-</div>)
-}
-}
-export default LoadMenu;
+
+    <h1>Menu</h1>
+    {items}
+
+
+
+    </div>)
+    }
+    }
+    export default LoadMenu;

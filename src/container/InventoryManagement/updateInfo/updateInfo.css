@@ -1,7 +1,7 @@
 .UpdateInfo{
     width: 80%;
     min-height: 400px;
-    
+
     margin: 50px auto;
     box-sizing: border-box;
     border: 6px ridge #bbe4ed;
@@ -10,8 +10,8 @@
     float: left;
     display: inline-block;
     width: 45%;
-  
-   
+
+
 }
 .leftImg>div{
     width: 80%;
@@ -22,25 +22,25 @@
     height: 230px;
     border-radius: 18px;
     background-color: whitesmoke;
-    
+
 }
 .rightInfo{
-  
+
     display: inline-block;
     width: 53%;
     height: inherit;
-    
- 
+
+
 }
 .rightInfo label{
- font-weight: bold;
-  display: block
-    
+    font-weight: bold;
+    display: block
+
 }
 
 .rightInfo div{
     margin: 10px;
-    
+
 }
 .rightInfo input{
     width: 280px;
@@ -51,6 +51,7 @@ textArea{
     width: 280px;
 }
 .UpdateInfo button{
+
     min-width: 80px;
     padding: 8px;
     min-height: 30px;
@@ -59,8 +60,7 @@ textArea{
     margin: 10px;
     color: aliceblue;
     background-color: orange;
-    
-  
+
 }
 
 form{

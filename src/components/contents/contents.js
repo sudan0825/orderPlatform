@@ -3,6 +3,8 @@ import myStyle from './contents.css'
 import { Route, Switch} from 'react-router-dom';
 import InventoryManagement from '../../container/InventoryManagement/InventoryManagement';
 import LoadMenu from '../../container/LoadMenu/LoadMenu';
+import Login from '../../container/login/login';
+import Signin from '../../container/signin/signin';
 import CheckOut from '../../container/CheckOut/CheckOut';
 import Orders from '../../container/orders/orders';
 
@@ -43,7 +45,7 @@ getChildrenProps=(dataFromChild)=>{
         <Switch>
 
         <Route path="/Menu" render={(props)=>(<LoadMenu 
-                                              getChildrenProps={this.getChildrenProps}
+                                              passToparent={this.getChildrenProps}
                                               {...props}
                                               />)}/>
          <Route path="/checkout" render={(props)=>(<CheckOut 
@@ -51,11 +53,13 @@ getChildrenProps=(dataFromChild)=>{
                                                     {...props}
                                                    />)} />
          <Route path="/" exact render={(props)=>(<LoadMenu 
-                                                 getChildrenProps={this.getChildrenProps}
+                                                 passToparent={this.getChildrenProps}
                                                     {...props}
                                                  />)} />
         <Route path="/Orders" component={Orders} />
         <Route path="/InventoryManagement" component={InventoryManagement} />
+        <Route path="/Login" component={Login} />
+        <Route path="/Signin" component={Signin} />
 
        </Switch>
 

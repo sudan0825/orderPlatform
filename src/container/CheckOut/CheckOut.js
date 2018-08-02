@@ -47,7 +47,7 @@ checkout=()=>{
   
  
     let orders=[this.state.orders,this.state.totalPrice.toFixed(2),new Date()]
-      
+    
     axios.post('/orders.json', orders).then((res)=>{
         console.log("post order to firebase database")
          this.props.history.push('/');
@@ -55,9 +55,31 @@ checkout=()=>{
         console.log("something wrong when post order to firebase")
         console.log(e)
     })
+    let inventoryList={...this.state.beers};
+    let ordersList=[...this.state.orders];
+    for(let beer in inventoryList){
+        for(let i in ordersList){
+          if(inventoryList[beer].name===ordersList[i].name) {
+              console.log("name is same");
+              inventoryList[beer].inventory-=ordersList[i].count;
+              console.log(  inventoryList[beer].inventory)
+              axios.patch('/inventory/'+beer+'.json',{inventory:inventoryList[beer].inventory}).then((res)=>{
+                  console.log(res)
+              }).catch(e=>{
+                  console.log(e)
+              })
+              
+          } 
+        }
+        
+    }
+
 }
 render(){
-        
+       console.log(this.state.beers);
+       console.log(this.state.orders);
+       console.log(this.state.totalPrice);
+    
  let items=[]
   if(this.state.orders.length){
      

@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import myStyle from './NavigationMenue.css';
 
 
@@ -6,27 +6,26 @@ import NavigationItems from '../NavigationItems/NavigationItems';
 
 
 
-class navigationMenue extends Component{
+const navigationMenue=()=>{
+
+    let menue=["Menu", "Orders", "InventoryManagement"];
+     let log=["Login", "Signin"]
     
-    state={
-        menue:["Menu", "Orders", "InventoryManagement"]
-    }
-    nvItems=this.state.menue.map((item)=>{
-     
-        return <NavigationItems key={item} item={item}/>})
-    render(){
-    return (
-    <div className={myStyle.NavigationMenue}>
-        
-      <ul>{this.nvItems}</ul>
-       
-   </div>)
-}
+let nvItems=menue.map((item)=>(<NavigationItems key={item} item={item}/>))
+let logsMenu=log.map((l)=>(<NavigationItems key={l} item={l}/>))
+   
+        return (
+            <div className={myStyle.NavigationMenue}>
+
+            <ul>{nvItems}</ul>
+            <ul>{logsMenu}</ul>
+
+            </div>
+        )
+            }
+
     
-}
-        
-        export default navigationMenue;
-        
-        
-        
-        
+export default navigationMenue;
+
+
+

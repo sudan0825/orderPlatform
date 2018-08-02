@@ -1,6 +1,7 @@
 .NavigationMenue{
     display: inline-block;
     position: absolute;
+    width: 100%;
     left:0;
     bottom: 0;
     
@@ -13,7 +14,14 @@
     text-align: left;
     padding: 0;
     position: relative;
+    display: inline-block;
     
+}
+.NavigationMenue ul:first-child{
+    float: left;
+}
+.NavigationMenue ul:last-child{
+    float: right;
 }
 
 .NavigationMenue ul li{

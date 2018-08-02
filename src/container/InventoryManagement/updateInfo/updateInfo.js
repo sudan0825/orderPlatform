@@ -214,11 +214,15 @@ modifyItem=(event)=>{
     axios.get( '/inventory.json').then((res)=>{
 
         const inventoryList=res.data;
-
+        let flag=false;
+ 
         for(let iv in inventoryList){
+            console.log(this.state.beers.name.value.toLowerCase());
+            console.log(inventoryList[iv].name.toLowerCase());
 
 
             if(this.state.beers.name.value.toLowerCase()===inventoryList[iv].name.toLowerCase()){
+                flag=true;
                 let update=inventoryList[iv];
                 
                 for (let key in this.state.beers) {
@@ -230,12 +234,20 @@ modifyItem=(event)=>{
 
 
                 }
-                axios.put('/inventory/'+iv+'.json', update)
+                axios.put('/inventory/'+iv+'.json', update).then((res)=>{
+                    console.log("modify an item")
+                }).catch((e)=>{
+                     console.log("CANNOT modify an item. The error is:")
+                     console.log(e)
+                })
 
-            }else{
-                this.setState({allRequired:"The item does not exist in the inventory"})
             }
 
+        }
+        if(!flag){
+           
+                this.setState({allRequired:"The item does not exist in the inventory"})
+            
         }
     })
 }

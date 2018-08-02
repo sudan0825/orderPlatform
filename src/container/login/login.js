@@ -68,8 +68,8 @@ render(){
 />
 
 ))}
-    <Button buttonValue="Log in" buttoneType="Submit"></Button>
-    <Button clickButton={this.cancel} buttonValue="Cancel" ></Button>
+    <div className={myStyle.btgp}><Button buttonValue="Log in" buttoneType="Submit"></Button>
+    <Button clickButton={this.cancel} buttonValue="Cancel" ></Button></div>
 
 
 </form>

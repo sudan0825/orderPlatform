@@ -5,7 +5,9 @@ import SideOrderSummary from '../../components/contents/sideSummary/sideOrderSum
 import SosItemContainer from '../../components/contents/sideSummary/sosItemContainer/sosItemContainer';
 import Backdrop from '../../components/UI/backDrop/backDrop';
 
+import * as actionTypes from '../../store/actions/actionTypes';
 
+import { connect } from 'react-redux';
 import axios from '../../axios';
 
 
@@ -27,6 +29,7 @@ componentWillMount(){
     axios.get('/inventory.json').then(res=>{
 
         let inventory=res.data;
+      
         for (let item in inventory){
             inventory[item].count=0;
             inventory[item].disablePlus=false;
@@ -68,6 +71,7 @@ add=(key)=>{
     if(orderItem.count>0)   orderItem.disableMinus=false;
     UpdatedOrder[key]=orderItem;
     this.setState({beers:UpdatedOrder,totalPrice:this.state.totalPrice+cost});
+    console.log(this.state.beers)
 
 
 }
@@ -103,12 +107,14 @@ minus=(key)=>{
 addToCart=(order)=>{
 
     let copyOfOldOrder=[...this.state.orders]
-    //check is the beer ordered before or not
+    //check the beer is in cart or not. if it is in cart already, add the account based on that
+
     let flag=copyOfOldOrder.some(o=>{
         if(o.name===order.name){
-            o.count=order.count;
+            o.count+=order.count;
 
         }
+        
         return o.name===order.name
     })
     if(!flag){
@@ -118,6 +124,7 @@ addToCart=(order)=>{
             image:"",
 
         }
+         
         for (let key in updatedOrders){
 
             updatedOrders[key]=order[key] 
@@ -197,11 +204,7 @@ checkout=(event)=>{
 continue=()=>{
     this.setState({show:false})
 }
-clickSOS=(e)=>{
-    e.stopPropagation();
-    ;
 
-}
 render(){
 
     const items= [];
@@ -261,7 +264,7 @@ return (
     <SideOrderSummary 
     checkout={this.checkout}
     continue={this.continue}
-    clickSOS={this.clickSOS}>
+    >
     {orders}
     </SideOrderSummary>
     </Backdrop>
@@ -277,4 +280,17 @@ return (
     </div>)
     }
     }
-    export default LoadMenu;
+    
+const mapStateToProps = state =>{
+    return {
+       orders:state.ordersList
+    }
+    }
+    
+const mapDispatchToProps = dispatch => {
+    return {
+    add: ()=>dispatch({type:actionTypes.ADD_BEER}),
+    remove: ()=>dispatch({type:actionTypes.REMOVE_BEER})
+    }
+    }
+export default connect(mapStateToProps, mapDispatchToProps) (LoadMenu);

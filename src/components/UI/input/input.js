@@ -7,6 +7,10 @@ const input=(props)=>{
     let inputElement=null;
     const inputClasses =[myStyle.InputElement];
     
+    if (props.invalid && props.shouldValidate && props.touched) {
+        inputClasses.push(myStyle.Invalid);
+    }
+    
     switch (props.elemType){
         case ('input'):
             inputElement=<input 
@@ -33,8 +37,7 @@ const input=(props)=>{
             return (
             <div className={myStyle.Input}>
                 <label className={myStyle.Label}>{props.label} </label>
-                {props.label==="Price"?<div style={{color:'red'}}>{props.keep2D}</div>:null}
-                {props.label==="Inventory"?<div style={{color:'red'}}>{props.isNum}</div>:null}
+            
                 {inputElement}
                 
                 </div>

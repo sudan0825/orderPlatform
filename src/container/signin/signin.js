@@ -89,8 +89,7 @@ render(){
         shouldValidate={elem.config.validation}
         touched={elem.config.touched}
         label={elem.id}
-        keep2D={this.state.keep2D}
-        isNum={this.state.isNum}
+       
         changed={(event)=>this.inputChangeHandler(event, elem.id)} 
 
 />

@@ -8,9 +8,6 @@ import Contents from './components/contents/contents';
 //import axios from './axios';
 
 
-
-
-
 import { BrowserRouter } from 'react-router-dom';
 
 
@@ -24,7 +21,8 @@ class App extends Component {
    }
   render() {
     return (
-         <BrowserRouter>
+       
+        <BrowserRouter>
       <div className={myStyle.App}>
        <TopBar/> 
        
@@ -33,7 +31,9 @@ class App extends Component {
         <Footer/>
      
       </div>
-         </BrowserRouter>
+        
+           </BrowserRouter>
+        
     );
   }
 }

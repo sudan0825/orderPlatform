@@ -4,7 +4,7 @@ import myStyle from './App.css';
 
 import TopBar from './components/topBar/topBar';
 import Footer from './components/footer/footer';
-import Contents from './components/contents/contents';
+import Contents from './container/contents';
 //import axios from './axios';
 
 

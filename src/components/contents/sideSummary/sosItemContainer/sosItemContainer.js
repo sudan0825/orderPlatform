@@ -9,7 +9,7 @@ const sosItemContainer = (props)=>{
         <div>
          <h4>{props.name}</h4>
         <p>Bottles: {props.number}</p>
-        <button onClick={(e)=>props.removeFOS(e)}>Remove</button>
+        <button onClick={(e)=>props.removeFromCart(e)}>Remove</button>
         </div>
 
 

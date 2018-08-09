@@ -5,7 +5,7 @@ import SideOrderSummary from '../../components/contents/sideSummary/sideOrderSum
 import SosItemContainer from '../../components/contents/sideSummary/sosItemContainer/sosItemContainer';
 import Backdrop from '../../components/UI/backDrop/backDrop';
 
-import * as actionTypes from '../../store/actions/actionTypes';
+import * as actionTypes from '../../store/actions/index';
 
 import { connect } from 'react-redux';
 import axios from '../../axios';
@@ -16,88 +16,17 @@ import axios from '../../axios';
 
 class LoadMenu extends Component {
     state ={
-        beers:{},
-        totalPrice:0,
+     
         show:false,
-        orders:[]
+      
 
     }
 /* more--> add more beer, less--> decrease the number of order, count-->how many beers are order
    dplus-->disable add button if the number of order reach inventory
    dmin-->disable the minus button& addto the cart button if he number of order is equal to 0*/
 componentWillMount(){
-    axios.get('/inventory.json').then(res=>{
-
-        let inventory=res.data;
-      
-        for (let item in inventory){
-            inventory[item].count=0;
-            inventory[item].disablePlus=false;
-            inventory[item].disableMinus=true;
-        }
-        this.setState({beers:inventory})
-
-    }).catch(error=>{
-        console.log(error.message)
-    })
-}
-
-componentDidMount(){
-
-}
-
-//add a beer to order
-add=(key)=>{
-    let cost=0;
-    let UpdatedOrder={
-        ...this.state.beers
-    }
-    const orderItem={
-        ...UpdatedOrder[key]
-    }
-
-    if(orderItem.inventory>orderItem.count){
-
-        orderItem.count+=1; 
-
-        cost+=Number(orderItem.price);
-      
-    }
-
-    if(orderItem.count>=Number(orderItem.inventory)){
-
-        orderItem.disablePlus=true;  
-    } 
-    if(orderItem.count>0)   orderItem.disableMinus=false;
-    UpdatedOrder[key]=orderItem;
-    this.setState({beers:UpdatedOrder,totalPrice:this.state.totalPrice+cost});
-    console.log(this.state.beers)
-
-
-}
-//reduce a beer from the order
-minus=(key)=>{
-    let cost=0;
-    let UpdatedOrder={
-        ...this.state.beers
-    }
-    const orderItem={
-        ...UpdatedOrder[key]
-    }
-
-    if(orderItem.count>0){
-        orderItem.count-=1; 
-
-        cost-=Number(orderItem.price);
-       
-    }
-
-
-    if(orderItem.inventory>orderItem.count) orderItem.disablePlus=false;
-    if(orderItem.count===0)orderItem.disableMinus=true;
-
-    UpdatedOrder[key]=orderItem;
-    this.setState({beers:UpdatedOrder,totalPrice:this.state.totalPrice+cost});
+    
+    this.props.onFetchInventory();
 
 }
 
@@ -106,74 +35,20 @@ minus=(key)=>{
 //add order to side order summary
 addToCart=(order)=>{
 
-    let copyOfOldOrder=[...this.state.orders]
-    //check the beer is in cart or not. if it is in cart already, add the account based on that
-
-    let flag=copyOfOldOrder.some(o=>{
-        if(o.name===order.name){
-            o.count+=order.count;
-
-        }
-        
-        return o.name===order.name
-    })
-    if(!flag){
-        let updatedOrders={
-            name:"",
-            count:0,
-            image:"",
-
-        }
-         
-        for (let key in updatedOrders){
-
-            updatedOrders[key]=order[key] 
-
-
-        }
-        copyOfOldOrder=copyOfOldOrder.concat(updatedOrders);
-    }
-
-
-
-
-
-    this.setState({orders:copyOfOldOrder, show:true})
+  
+    this.setState({show:true})
 
 
 }
-
-//remove orders from side order summary
-removeFOS=(event, i)=>{
-
-    event.stopPropagation() 
-
-    let changeOrders=[...this.state.orders];
-
-    let changeBeers={...this.state.beers};
-
-    //if remove a beer from side order summary, set the number of count to 0;
-    for(let key in changeBeers){
-
-        if(changeBeers[key].name===changeOrders[i].name){  
-            changeBeers[key].count=0;
-            changeBeers[key].disableMinus=true;
-            break;
-        }
-    }
-
-    changeOrders.splice(i,1);
-    if(changeOrders.length===0){
-        this.setState({show:false})
-    }
-    this.setState({orders:changeOrders,beers:changeBeers})
-    console.log(this.state.beers)
+removeFromCart=(e,o)=>{
+    e.stopPropagation();
+    console.log("removeFromCart(e,o)")
+    this.props.removeFromCart(o)
 }
 
 
 clickBackDrop=(event)=>{
 
-    console.log(event.target)
 
     this.setState({show:!this.state.show})
 }
@@ -181,15 +56,15 @@ clickBackDrop=(event)=>{
 checkout=(event)=>{
     //pass the data to parent
     event.stopPropagation();
-
-
-    this.props.passToparent(this.state);
-    this.props.history.push({pathname:'/checkout'});
+ this.props.history.push({pathname:'/checkout'});
+//pass props children to parent
+//    this.props.passToparent(this.state);
+   
     //pass value through route
     //    console.log(this.state.totalPrice)
     //      const queryParams = [];
-    //        for (let i in this.state.orders) {
-    //            queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.state.orders[i]));
+    //        for (let i in this.props.orders) {
+    //            queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.props.orders[i]));
     //        }
     //        queryParams.push('price=' + this.state.totalPrice);
     //        const queryString = queryParams.join('&');
@@ -209,45 +84,49 @@ render(){
 
     const items= [];
 
-    if(this.state.beers){
+    if(this.props.inventory){
 
-        for(let key in this.state.beers){
-
+        for(let key in this.props.inventory){
+             let idKey=this.props.inventory[key].id;
+             let item=this.props.inventory[key];
+           
+         
             items.push( 
                 <ItemContainer
-                key={this.state.beers[key].name}
-                price={this.state.beers[key].price}
-                name={this.state.beers[key].name}
-                image={this.state.beers[key].image}
-                description={this.state.beers[key].description}
-                more={()=>this.add(key)}
-        less={()=>this.minus(key)}
-        count={this.state.beers[key].count}
-        dplus={this.state.beers[key].disablePlus}
-        dmin={this.state.beers[key].disableMinus}
-        addToCart={()=>this.addToCart({...this.state.beers[key]})}
+                key={idKey}
+                price={item.price}
+                name={item.name}
+                image={item.image}
+                description={item.description}
+                more={()=>this.props.add(item)}
+        less={()=>this.props.remove(item)}
+        count={this.props.orders[idKey]?this.props.orders[idKey].count:0}
+        dplus={this.props.orders[idKey]?this.props.orders[idKey].disablePlus:false}
+        dmin={this.props.orders[idKey]?this.props.orders[idKey].disableMinus:true}
+        addToCart={()=>this.addToCart({item})}
 
     />)
 }
 }
 const orders=[];
 
-if(this.state.orders.length){
-
-    this.state.orders.forEach((order,i)=>{
+if(this.props.orders){
+ let orderList=this.props.orders;
+    for( let o in orderList){
 
         orders.push(
             <SosItemContainer 
-            key={i}
-            name={order.name}
-            image={order.image}
-            number={order.count}
+            key={o}
+            name={orderList[o].name}
+            image={orderList[o].image}
+            number={orderList[o].count}
 
-            removeFOS={(e)=>this.removeFOS(e,i)}
+            removeFromCart={(e)=>this.removeFromCart(e,o)}
 
-                              />)  
+                              />
+    )  
 
-                              })
+                              }
 
 }
 
@@ -283,14 +162,20 @@ return (
     
 const mapStateToProps = state =>{
     return {
-       orders:state.ordersList
+       orders:state.ordersReducer.ordersList,
+       totalPrice:state.ordersReducer.totalPrice,
+       inventory:state.beersListReducer.inventory
+      
     }
     }
     
 const mapDispatchToProps = dispatch => {
     return {
-    add: ()=>dispatch({type:actionTypes.ADD_BEER}),
-    remove: ()=>dispatch({type:actionTypes.REMOVE_BEER})
+    add: (beer)=>dispatch(actionTypes.add(beer)),
+    remove: (beer)=>dispatch(actionTypes.remove(beer)),
+    onFetchInventory:()=>dispatch (actionTypes.getInventory()),
+    removeFromCart:(key)=>dispatch(actionTypes.removeFromCart(key))
     }
     }
-export default connect(mapStateToProps, mapDispatchToProps) (LoadMenu);
+export default connect(mapStateToProps, mapDispatchToProps) (LoadMenu,axios);
+

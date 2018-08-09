@@ -76,7 +76,7 @@ render(){
                                key = {date.getTime()}
             date={time}
             orderContent={this.state.orders[order][0]}
-            price={this.state.orders[order][1]}
+            price={this.state.orders[order][1].toFixed(2)}
 
             />)
 

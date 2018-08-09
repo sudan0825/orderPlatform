@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import myStyle from './InventoryManagement.css';
+import * as actionTypes from '../../store/actions/index';
+
+
+
+
 import axios from '../../axios';
 
 import UpdateInfo from './updateInfo/updateInfo';
@@ -11,7 +17,7 @@ import Button from '../../components/UI/buttons/buttons';
 
 class InventoryManagement extends Component {
     state={
-        inventory:{},
+     
         item:{
             name:"",
             description:"",
@@ -25,12 +31,10 @@ class InventoryManagement extends Component {
 
 
 componentWillMount(){
-
-    axios.get('/inventory.json').then(res=>{
-        
-        this.setState({inventory:res.data})
-
-    })
+  this.props.onFetchInventory();
+    console.log(this.props.inventory)
+    console.log(this.props.loading)
+   
 }
 
 deleteItem=(i)=>{
@@ -63,22 +67,22 @@ modifyItem=(product)=>{
 render(){
 
   let productionList=[]
-    if(this.state.inventory){
-        for(let i in this.state.inventory){
+    if(this.props.inventory){
+        for(let i in this.props.inventory){
 
             productionList.push(
-                <div key ={i} 
+                <div key ={this.props.inventory[i].id} 
                    className={myStyle.productionList}>
 
                 
                 <ImageContainer
-                image={this.state.inventory[i].image}/>
+                image={this.props.inventory[i].image}/>
                 
                 <Description 
-                price={this.state.inventory[i].price}
-                name={this.state.inventory[i].name}
-                inventory={this.state.inventory[i].inventory}
-                description={this.state.inventory[i].description}
+                price={this.props.inventory[i].price}
+                name={this.props.inventory[i].name}
+                inventory={this.props.inventory[i].inventory}
+                description={this.props.inventory[i].description}
             
                 
                 
@@ -113,5 +117,23 @@ render(){
 
                 </div>)
                 }
-                }
-                export default InventoryManagement;
+ }
+
+const mapStateToProps = state =>{
+   return {
+          inventory: state.beersListReducer.inventory,
+          loading: state.beersListReducer.loading
+                        };
+                        
+}
+                        
+const mapDispatchToProps =dispatch=>{
+                        
+        return {
+                onFetchInventory:()=>dispatch (actionTypes.getInventory())
+                        }             
+                        
+}
+                        
+
+ export default connect(mapStateToProps,mapDispatchToProps) (InventoryManagement, axios);

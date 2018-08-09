@@ -15,3 +15,16 @@
 .bt button{
     margin: 8px;
 }
+.productionList>div:first-child{
+    width: 40%;
+    float: left;
+}
+.InventoryManagement img{
+    position: relative;
+    margin: auto;
+    margin-top:20px;
+    width:  auto;
+    height: 300px;
+    border-radius: 10px;
+  
+}

@@ -1,13 +1,13 @@
 import React from 'react';
-import myStyle from './description.css'
+
 
 const description=(props)=>(
-    <div className={myStyle.description}>
-    <h3>{props.name}</h3>
+    <div>
+    <h4>{props.name}</h4>
 
     <p>{props.description}</p>
     
-    <p><b style={{ display:props.inventory==null?'none':'inlineBlock'}}>Price:</b> {props.price}</p>
+    <p><b>Price: $ {props.price}</b> </p>
     
     <p><b style={{ display:props.inventory==null?'none':'inlineBlock'}}>Inventory:</b> {props.inventory}</p>
 

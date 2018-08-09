@@ -1,9 +1,49 @@
 .itemContainer{
-    width: 95%;
-    min-height: 300px;
+    position: relative;
+    width: 20%;
+    height: 300px;
     margin: 15px auto;
     overflow: auto;
     border: 6px ridge #bbe4ed;
+    float: left;
+    margin: 15px 20px;
+}
+
+.itemContainer>div{
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+   
+}
+.itemContainer>div:last-child{
+   bottom: 0;
+}
+.itemContainer p{
+
+    margin: 5px;
+    font-size:14px;
+}
+
+.itemContainer img{
+    position: relative;
+    margin-top:20px;
+    width:  auto;
+    height: 160px;
+    border-radius: 10px;
+
+}
+
+.itemContainer img:hover{
+  
+    z-index: 10;
+    height: 180px;
+}
+
+.itemContainer:hover{
+    background-color:#e0b3f9;
+     border: 6px ridge #b749f4;
 }
 
 

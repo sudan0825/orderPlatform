@@ -77,7 +77,7 @@ render(){
                 
                 <ImageContainer
                 image={this.props.inventory[i].image}/>
-                
+                <div>
                 <Description 
                 price={this.props.inventory[i].price}
                 name={this.props.inventory[i].name}
@@ -93,6 +93,7 @@ render(){
                  <Button clickButton={()=>this.modifyItem(this.state.inventory[i])} buttonValue="Modify"></Button>
                  <Button clickButton={()=>this.deleteItem(i)} buttonValue="Delete"></Button>
                 </div>
+         </div>
 
 
 

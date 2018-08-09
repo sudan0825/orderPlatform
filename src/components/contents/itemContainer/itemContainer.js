@@ -11,11 +11,11 @@ const itemContainer=(props)=>(
     <div className={myStyle.itemContainer}>
     <ImageContainer
     image={props.image}/>
-    
+    <div>
     <Description 
     price={props.price}
     name={props.name}
-    description={props.description}
+  
    
     
     />
@@ -32,7 +32,7 @@ const itemContainer=(props)=>(
     minus="-"
     >{props.children}</ActionContainer>
 
-
+</div>
 
 
     </div>)

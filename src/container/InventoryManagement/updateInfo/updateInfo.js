@@ -217,11 +217,10 @@ modifyItem=(event)=>{
         let flag=false;
  
         for(let iv in inventoryList){
-            console.log(this.state.beers.name.value.toLowerCase());
-            console.log(inventoryList[iv].name.toLowerCase());
-
-
-            if(this.state.beers.name.value.toLowerCase()===inventoryList[iv].name.toLowerCase()){
+  
+            
+            if(this.state.beers.name.value.trim().toLowerCase()===inventoryList[iv].name.trim().toLowerCase()){
+                
                 flag=true;
                 let update=inventoryList[iv];
                 

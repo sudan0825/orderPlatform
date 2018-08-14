@@ -37,66 +37,86 @@ export const deleteError=()=>{
 
 export const logout=()=>{
     firebase.auth().signOut().then(function() {
-        
+
     }).catch(function(error) {
         console.log("cannot log out")
     });
     return {
-            type:actionTypes.LOGOUT_SUCCESS
+        type:actionTypes.LOGOUT_SUCCESS
 
-        }
+    }
 }
+const setSessionPersistence=()=>{
+    firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+        .then(function() {
+        // Existing and future Auth states are now persisted in the current
+        // session only. Closing the window would clear any existing state even
+        // if a user forgets to sign out.
+        // ...
+        // New sign-in will be persisted with session persistence.
+        console.log("session persistence")
 
+    })
+        .catch(function(error) {
+        // Handle Errors here.
+       console.log(error.message)
+    });
+}
 export const auth=(data)=>{
     return dispatch=>{
         const authData = {
             ...data
         };
         dispatch(authStart());
-        if(!authData.isSignUp){
-            firebase.auth().createUserWithEmailAndPassword(authData.email, authData.password).catch((err)=>{
-                let code=err.code;
-                if(code==="auth/email-already-in-use"){
-                    console.log(err)
-                    dispatch(setRedirectPath('/login'));
-                    dispatch(authFail("The user email exists already"))
-                } 
-                return 
+    
+            if(!authData.isSignUp){
+                return firebase.auth().createUserWithEmailAndPassword(authData.email, authData.password)
+                    .then(res=>{
+                    console.log(res);
+                    setSessionPersistence();
+                    dispatch(authSuccess());
+                    
 
-            });
 
-        }else{
-            firebase.auth().signInWithEmailAndPassword(authData.email, authData.password).catch(function(error) {
-                let code=error.code;
-                console.log(error);
-                if(code==="auth/user-not-found"){
+                })
+                    .catch((err)=>{
+                    let code=err.code;
+                    if(code==="auth/email-already-in-use"){
+                        console.log(err)
+                        dispatch(setRedirectPath('/login'));
+                        dispatch(authFail("The user email exists already"))
+                    } 
+                    return 
 
-                    dispatch(setRedirectPath('/signup'));    
-                    dispatch(authFail("There is no user record corresponding to this identifier. The user may have been deleted"))
-                }else {
+                });
 
-                    dispatch(authFail('The password is invalid.'))
-                }
-                return 
+            }else{
+                return firebase.auth().signInWithEmailAndPassword(authData.email, authData.password)
+                    .then(res=>{
+                    console.log(res);
+                    setSessionPersistence()
+                    dispatch(authSuccess());
+                    
 
-            });
+                })
+                    .catch(function(error) {
+                    let code=error.code;
+                    console.log(error);
+                    if(code==="auth/user-not-found"){
 
-        }
-        firebase.auth().onAuthStateChanged(function(user) {
-            if (user) {
-                // User is signed in.
-                console.log(user)
+                        dispatch(setRedirectPath('/signup'));    
+                        dispatch(authFail("There is no user record corresponding to this identifier. The user may have been deleted"))
+                    }else {
 
-                dispatch(authSuccess());
-            } else {
-                // No user is signed in.
-                console.log("auth fail")
-                
+                        dispatch(authFail('The password is invalid.'))
+                    }
+                    return 
+
+                });
+
             }
-        });
 
-
-
+          
 
 
     }

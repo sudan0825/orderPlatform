@@ -12,11 +12,19 @@ import Logout from './Logout/Logout';
 import { connect } from 'react-redux';
 import * as actionTypes from '../store/actions/index'
 
-
+import firebase from "firebase/app";
+import 'firebase/auth';
 
 class contents extends Component{
     componentWillUpdate(){
-        console.log("conetent will update");
+//        firebase.auth().onAuthStateChanged((user)=>{
+//            if(user){
+//               console.log("use is authed") 
+//            }else{
+//                console.log("use is not authed")  
+//            }
+//            
+//        })
         this.props.deleteErrorReport();
     }
  
@@ -27,17 +35,18 @@ class contents extends Component{
        
         let routes =(
             <Switch>
-            <Route path="/login" component={Login} />
-            <Route path="/signup" component={Signin} />
             <Route path="/menu" component={LoadMenu}/>      
             <Route path="/" exact component={LoadMenu}/>
+            <Route path="/login" component={Login} />
+            <Route path="/signup" component={Signin} />
+            
 
             <Redirect to="/" />
 
             </Switch>
         )
         if(this.props.isAuthenticated){
-            console.log("authed")
+           
             routes=(
                 <Switch>
 

@@ -32,8 +32,7 @@ class InventoryManagement extends Component {
 
 componentWillMount(){
   this.props.onFetchInventory();
-    console.log(this.props.inventory)
-    console.log(this.props.loading)
+
    
 }
 
@@ -52,6 +51,7 @@ deleteItem=(i)=>{
 }
 
 modifyItem=(product)=>{
+    
    let update={...this.state.item}
     
     for(let i in update){
@@ -90,7 +90,7 @@ render(){
                 />
                 
                 <div className={myStyle.bt}>
-                 <Button clickButton={()=>this.modifyItem(this.state.inventory[i])} buttonValue="Modify"></Button>
+              {/*<Button clickButton={()=>this.modifyItem(this.props.inventory[i])} buttonValue="Modify"></Button>*/} 
                  <Button clickButton={()=>this.deleteItem(i)} buttonValue="Delete"></Button>
                 </div>
          </div>

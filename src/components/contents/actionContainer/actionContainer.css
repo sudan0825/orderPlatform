@@ -6,7 +6,7 @@
     border-radius: 6px;
     font-size: 16px;
     color: aliceblue;
-    background-color: orange;
+    background-color: #227d8e;
 }
 .buttonDiv{ 
     display: flex;
@@ -32,6 +32,6 @@
     padding: 0;
     margin: 0 15px;
     color: aliceblue;
-    background-color: #227d8e;
+    background-color: orange;
     border-style: none;
 }

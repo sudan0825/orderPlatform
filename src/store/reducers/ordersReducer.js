@@ -116,8 +116,9 @@ const postOrderSuccess=(state,action)=>{
                     
                  
                     updateInventory[beer].inventory-=state.ordersList[order].count;
-                   axios.patch('/inventory/'+beer+'.json',{inventory:updateInventory[beer].inventory})                     .then(res=>{console.log("update inventory")})  
-                          .catch(e=>{console.log('CANNOT UPDATE')})
+                   axios.patch('/inventory/'+beer+'.json',{inventory:updateInventory[beer].inventory})
+                       .then(res=>{console.log("update inventory")})
+                       .catch(e=>{console.log('CANNOT UPDATE')})
 
                 }
             }

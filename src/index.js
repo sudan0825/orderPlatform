@@ -6,6 +6,7 @@ import registerServiceWorker from './registerServiceWorker';
 
 import beersListReducer from './store/reducers/beersListReducer';
 import ordersReducer from './store/reducers/ordersReducer';
+import authReducer from './store/reducers/authReducer';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
@@ -19,6 +20,7 @@ import 'firebase/database';
 import 'firebase/storage';
 //config firebase App
 var config = {
+    
     apiKey: "AIzaSyDgHLk9l9wcmoJvxddAtJauWKnNRQF65ZM",
     authDomain: "orderplatform2018.firebaseapp.com",
     databaseURL: "https://orderplatform2018.firebaseio.com",
@@ -33,7 +35,8 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer =combineReducers({
     beersListReducer:beersListReducer,
-    ordersReducer:ordersReducer
+    ordersReducer:ordersReducer,
+    authReducer:authReducer
 })
 
 const store = createStore(rootReducer, composeEnhancers(

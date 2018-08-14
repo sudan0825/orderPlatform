@@ -8,5 +8,11 @@ export {
     checkout,
     remove,
     removeFromCart
-} from './order'
+} from './order';
+
+export {
+    auth,
+     deleteError,
+    logout
+} from './auth'
 

@@ -5,7 +5,9 @@ import NavigationMenue from './navigation/NavigationMenue/NavigationMenue';
 
 const topBar=(props)=>(
     <div className={myStyle.topBar}>
-       <NavigationMenue/>
+       <NavigationMenue
+       
+        isAuthed={props.isAuthed}/>
       
                   
    </div>)

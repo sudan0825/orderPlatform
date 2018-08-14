@@ -8,6 +8,7 @@ const input=(props)=>{
     const inputClasses =[myStyle.InputElement];
     
     if (props.invalid && props.shouldValidate && props.touched) {
+   
         inputClasses.push(myStyle.Invalid);
     }
     

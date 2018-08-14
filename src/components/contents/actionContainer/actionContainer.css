@@ -21,6 +21,7 @@
     font-size: 16px;
     padding-top: 3px;
     text-align: center;
+    
 }
 .buttonDiv button{
     width: 22px;
@@ -30,5 +31,7 @@
     text-align: center;
     padding: 0;
     margin: 0 15px;
-    background-color:#89b3bc;
+    color: aliceblue;
+    background-color: #227d8e;
+    border-style: none;
 }

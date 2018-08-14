@@ -8,15 +8,13 @@ const navigationItems=(props)=>{
    
     return (
     <li className={myStyle.NavigationItems}>
-        <NavLink to={{
-        pathname:'/'+props.item,
-        }}
-       
-         activeStyle={{
-            color: 'aqua',
-         }}>
-        {props.item}
-        </NavLink></li>
+       <NavLink 
+            to={props.link}
+            exact={props.exact}
+            activeClassName={myStyle.active}>{props.children}</NavLink>
+        
+        
+        </li>
        )
 }
         

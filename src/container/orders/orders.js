@@ -34,6 +34,7 @@ componentWillMount(){
 }
 allOrders=()=>{
      this.setState({theDate:""})
+   
 }
 getOrderOfDate=()=>{
 
@@ -48,6 +49,8 @@ getOrderOfDate=()=>{
     
 }
 render(){
+    
+
     let dateOrder=[];
 
     if(this.state.orders){

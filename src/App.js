@@ -9,22 +9,24 @@ import Contents from './container/contents';
 
 
 import { BrowserRouter } from 'react-router-dom';
+import {connect } from 'react-redux'
 
 
 class App extends Component {
 
     componentDidMount(){
         
-//        axios.post('/orders.json', order).then((req)=>{
-//        console.log(req)
-//    }).catch(error=> console.log(error));
+  
    }
   render() {
     return (
        
         <BrowserRouter>
       <div className={myStyle.App}>
-       <TopBar/> 
+       <TopBar
+        
+        isAuthed={this.props.isAuthenticated}
+        /> 
        
         <Contents />
        
@@ -38,4 +40,9 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state =>{
+    return {
+        isAuthenticated:state.authReducer.isAuthed
+    }
+}
+export default connect(mapStateToProps,null) (App);

@@ -1,12 +1,13 @@
 .itemContainer{
     position: relative;
     width: 20%;
-    height: 300px;
+    height: 330px;
     margin: 15px auto;
     overflow: auto;
-    border: 6px ridge #bbe4ed;
+    border: 6px ridge #6eb3c1;
     float: left;
     margin: 15px 20px;
+    background-color: #95b6bc;
 }
 
 .itemContainer>div{
@@ -28,11 +29,20 @@
 
 .itemContainer img{
     position: relative;
-    margin-top:20px;
+    margin: auto;
     width:  auto;
     height: 160px;
-    border-radius: 10px;
+  
 
+}
+.itemContainer>div:first-child>div{
+    position: relative;
+     margin:10px auto;
+    width: 75%;
+    height: 180px;
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
 }
 
 .itemContainer img:hover{
@@ -42,8 +52,8 @@
 }
 
 .itemContainer:hover{
-    background-color:#e0b3f9;
-     border: 6px ridge #b749f4;
+    background-color:#e2cbf4;
+     border: 6px ridge #e0b3f9;
 }
 
 

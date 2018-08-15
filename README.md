@@ -1,7 +1,10 @@
+More functions are adding on...
 
-This project is a transaction platform built for small business daily operation. I use beer shop as an example. Vendor can upload new item in inventory management page. The inventory list will display under the 'Add New Production' form. The menu tab displays items information where small business owner can make an order. Bussines owner can sell beers  only if there is any in store. The daily transaction/all trasaction is checkable in orders page. Vendor can update inventory list in inventory management, such as delete the item or update item's information. Orders information are passed from child to parent components & parent to child component. 
+This project is a transaction platform built for small business daily operation. It provides following functions: Upload new productions, manage productions in stock, check daily orders/all orders, transaction interface, productions state sync between inventory & transaction tab, router protection...
 
-Data are stored in the Firebase database; Image files are stored in Firebase Storage. The whole project is hosted on Firebase. Live show here: https://orderplatform2018.firebaseapp.com/
+I use beer shop as an example. Business owner can upload new items in inventory management page. The inventory list will be displayed under the 'Add New Production' form. Business owner can check/delete/add/ modify production information. The menu tab displays items that instock. Small business owner can make an order there. Bussines owner can sell beers  only if there is any stock. The daily transaction/all trasaction are checkable in orders page. The inventory state is managed by Redux.
+
+Data are stored in the Firebase database; Image files are stored in Firebase Storage. Autherization with email/password. The whole project is hosted on Firebase. Live show here: https://orderplatform2018.firebaseapp.com/
 
 To run project on local machine, please:
 

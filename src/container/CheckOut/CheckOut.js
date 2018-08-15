@@ -26,7 +26,9 @@ cancel=()=>{
 
 checkOut=(o,p)=>{
     this.props.checkout(o,p);
+    alert("order sucessfully!")
     this.props.history.push('/');
+    
 }
 
 render(){

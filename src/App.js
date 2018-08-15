@@ -14,30 +14,37 @@ import {connect } from 'react-redux'
 
 class App extends Component {
 
-    componentDidMount(){
-        
-  
-   }
-  render() {
-    return (
-       
-        <BrowserRouter>
-      <div className={myStyle.App}>
-       <TopBar
-        
-        isAuthed={this.props.isAuthenticated}
-        /> 
-       
-        <Contents />
-       
-        <Footer/>
-     
-      </div>
-        
-           </BrowserRouter>
-        
-    );
-  }
+
+
+    componentWillMount(){
+
+        this.firstTimeVisit()
+    }
+    firstTimeVisit=()=>{
+        alert("To fully use the site's functions, please sign up (you can use a fake email address). Get detail production decription at here: https://github.com/sudan0825/orderPlatform")
+    }
+    render() {
+
+
+        return (
+
+            <BrowserRouter>
+            <div className={myStyle.App}>
+            <TopBar
+
+            isAuthed={this.props.isAuthenticated}
+            /> 
+
+            <Contents />
+
+            <Footer/>
+
+            </div>
+
+            </BrowserRouter>
+
+        );
+    }
 }
 
 const mapStateToProps = state =>{

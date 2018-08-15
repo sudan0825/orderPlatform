@@ -17,7 +17,7 @@ class signin extends Component{
                 elemType:'input',
                 elemConfig:{
                     type:'text',
-                    placeholder:'First Name',
+                    placeholder:'First Name: optional',
                     autoComplete:'given-name'
                 },
                 value:'',
@@ -32,7 +32,7 @@ class signin extends Component{
                 elemType:'input',
                 elemConfig:{
                     type:'text',
-                    placeholder:'Last Name',
+                    placeholder:'Last Name: optional',
                     autoComplete:'family-name'
 
                 },
@@ -48,7 +48,7 @@ class signin extends Component{
                 elemType:'input',
                 elemConfig:{
                     type:'email',
-                    placeholder:'Email address. It will be the username for you',
+                    placeholder:'Email address. It will be the username for you. Required',
                     autoComplete:'email'
                 },
                 value:'',

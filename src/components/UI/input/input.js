@@ -11,7 +11,15 @@ const input=(props)=>{
    
         inputClasses.push(myStyle.Invalid);
     }
-    
+     let option=[];
+    if(props.elemType==='select'){
+        let config={...props.elemConfig}
+       
+        option=config.option.map((o)=>{
+           
+            return <option key={o} value={o} >{o}</option>
+        })
+    }
     switch (props.elemType){
         case ('input'):
             inputElement=<input 
@@ -26,6 +34,15 @@ const input=(props)=>{
             {...props.elemConfig}
             value={props.value}
             onChange={props.changed} />
+            break;
+            
+        case ('select'):
+            inputElement=<select 
+            className={inputClasses.join(' ')}
+            {...props.elemConfig}
+            value={props.value}
+            onChange={props.changed}
+            value={props.value}>{option}</select>
             break;
             
         default:

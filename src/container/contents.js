@@ -35,7 +35,8 @@ class contents extends Component{
        
         let routes =(
             <Switch>
-            <Route path="/menu" component={LoadMenu}/>      
+            <Route path="/menu" component={LoadMenu}/>  
+          
             <Route path="/" exact component={LoadMenu}/>
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signin} />

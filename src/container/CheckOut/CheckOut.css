@@ -26,12 +26,15 @@
     background-color: azure;
     margin: auto;
     min-height: 400px;
+    text-align: center;
  
   
 }
-.checkoutdiv p{
- 
+.checkoutdiv>div:first-child{
+    margin: auto;
+    width:60%;
     text-align: left;
+   
 }
 
 .checkoutdiv p:last-child{

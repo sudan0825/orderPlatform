@@ -63,13 +63,13 @@ class signin extends Component{
                 elemType:'input',
                 elemConfig:{
                     type:'password',
-                    placeholder:'password',
+                    placeholder:'password; Minimum length is 6; Required',
                     autoComplete:'off'
                 },
                 value:'',
                 validation:{
                     required:true,
-                    isPassword:true
+                    minLength:6
                 },
                 valid:false,
                 touched:false

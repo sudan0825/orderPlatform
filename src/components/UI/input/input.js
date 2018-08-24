@@ -41,8 +41,7 @@ const input=(props)=>{
             className={inputClasses.join(' ')}
             {...props.elemConfig}
             value={props.value}
-            onChange={props.changed}
-            value={props.value}>{option}</select>
+            onChange={props.changed}>{option}</select>
             break;
             
         default:

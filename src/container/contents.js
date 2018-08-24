@@ -12,8 +12,6 @@ import Logout from './Logout/Logout';
 import { connect } from 'react-redux';
 import * as actionTypes from '../store/actions/index'
 
-import firebase from "firebase/app";
-import 'firebase/auth';
 
 class contents extends Component{
     componentWillUpdate(){
